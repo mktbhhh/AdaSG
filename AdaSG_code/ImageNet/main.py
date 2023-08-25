@@ -179,10 +179,10 @@ class ExperimentDesign:
 
 		elif self.settings.dataset in ["imagenet"]:
 			if self.settings.network in ["resnet18", "mobilenetv2_w1", "resnet50"]:
-			self.test_input = Variable(torch.randn(1, 3, 224, 224).cuda())
-			self.model = ptcv_get_model(self.settings.network, pretrained=True)
-			self.model_teacher = ptcv_get_model(self.settings.network, pretrained=True)
-			self.model_teacher.eval()
+				self.test_input = Variable(torch.randn(1, 3, 224, 224).cuda())
+				self.model = ptcv_get_model(self.settings.network, pretrained=True)
+				self.model_teacher = ptcv_get_model(self.settings.network, pretrained=True)
+				self.model_teacher.eval()
 
 		else:
 			assert False, "unsupport data set: " + self.settings.dataset
