@@ -284,6 +284,7 @@ class Loader(BasicDataset):
                     self.n_user = max(self.n_user, uid)
                     self.traindataSize += len(items)
         self.trainUniqueUsers = np.array(trainUniqueUsers)
+        self.settings.usernum = len(self.trainUniqueUsers)
         self.trainUser = np.array(trainUser)
         self.trainItem = np.array(trainItem)
 

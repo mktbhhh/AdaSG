@@ -108,14 +108,14 @@ class Generator_gowalla(nn.Module):
         super(Generator_gowalla, self).__init__()
 
         self.label_emb = nn.Embedding(self.settings.nClasses, self.settings.latent_dim)
-        self.l1 = nn.Sequential(nn.Linear(self.settings.latent_dim, self.settings.usernum))
+        self.l1 = nn.Sequential(nn.Linear(self.settings.latent_dim, 512))
 
-        # self.conv_blocks0 = nn.Sequential(
-        # 	nn.BatchNorm2d(128),
-        # )
+        self.conv_blocks0 = nn.Sequential(
+            nn.BatchNorm2d(128),
+        )
 
         self.conv_blocks1 = nn.Sequential(
-            nn.Conv2d(self.settings.usernum, 1)
+            nn.Conv2d(512, 1, 3, stride=1, padding=1)
         )
 
     def forwoard(self, z, labels):
@@ -142,7 +142,7 @@ class ExperimentDesign:
         self.unfreeze_Flag = True
 
         os.environ['CUDA_DEVICE_ORDER'] = "PCI_BUS_ID"
-        # os.environ['CUDA_VISIBLE_DEVICES'] = self.settings.visible_devices
+        os.environ['CUDA_VISIBLE_DEVICES'] = self.settings.visible_devices
 
         self.settings.set_save_path()
         self.logger = self.set_logger()
@@ -292,6 +292,12 @@ class ExperimentDesign:
             for n, m in model.named_children():
                 mods.append(self.quantize_model(m))
             return nn.Sequential(*mods)
+
+        elif type(model) == nn.Embedding:
+            quant_mod = Quant_Linear(weight_bit=weight_bit)
+            quant_mod.set_param(model)
+            return quant_mod
+
         else:
             q_model = copy.deepcopy(model)
             for attr in dir(model):
