@@ -294,8 +294,10 @@ class ExperimentDesign:
             return nn.Sequential(*mods)
 
         elif type(model) == nn.Embedding:
-            quant_mod = Quant_Linear(weight_bit=weight_bit)
-            quant_mod.set_param(model)
+            model.qconfig = torch.ao.quantization.float_qparams_weight_only_qconfig
+            model.cpu()
+            quant_mod = torch.ao.nn.quantized.Embedding.from_float(model)
+            quant_mod.cuda()
             return quant_mod
 
         else:
@@ -304,6 +306,10 @@ class ExperimentDesign:
                 mod = getattr(model, attr)
                 if isinstance(mod, nn.Module) and 'norm' not in attr:
                     setattr(q_model, attr, self.quantize_model(mod))
+
+                # if attr == "embedding_user":
+                #     setattr(q_model, attr, torch.ao.nn.quantized.Embedding.from_float(mod))
+
             return q_model
 
     def _replace(self):
