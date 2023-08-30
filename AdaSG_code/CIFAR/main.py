@@ -15,13 +15,15 @@ import torch.nn as nn
 from options import Option
 
 from dataloader import DataLoader, Loader
-from trainer import Trainer
+from trainer import Trainer, GnnTrainer
 
 import utils as utils
 from quantization_utils.quant_modules import *
 from pytorchcv.model_provider import get_model as ptcv_get_model
 from pytorchgnn.model_provider_gnn import get_model as gnn_get_model
 from conditional_batchnorm import CategoricalConditionalBatchNorm2d
+
+from utils.gnn_utils import BPRLoss
 
 
 class Generator(nn.Module):
@@ -30,7 +32,9 @@ class Generator(nn.Module):
         self.settings = options or Option(conf_path)
         self.label_emb = nn.Embedding(self.settings.nClasses, self.settings.latent_dim)
         self.init_size = self.settings.img_size // 4
-        self.l1 = nn.Sequential(nn.Linear(self.settings.latent_dim, 128 * self.init_size ** 2))
+        self.l1 = nn.Sequential(
+            nn.Linear(self.settings.latent_dim, 128 * self.init_size**2)
+        )
 
         self.conv_blocks0 = nn.Sequential(
             nn.BatchNorm2d(128),
@@ -47,7 +51,7 @@ class Generator(nn.Module):
             nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(64, self.settings.channels, 3, stride=1, padding=1),
             nn.Tanh(),
-            nn.BatchNorm2d(self.settings.channels, affine=False)
+            nn.BatchNorm2d(self.settings.channels, affine=False),
         )
 
     def forward(self, z, labels):
@@ -69,7 +73,9 @@ class Generator_imagenet(nn.Module):
         super(Generator_imagenet, self).__init__()
 
         self.init_size = self.settings.img_size // 4
-        self.l1 = nn.Sequential(nn.Linear(self.settings.latent_dim, 128 * self.init_size ** 2))
+        self.l1 = nn.Sequential(
+            nn.Linear(self.settings.latent_dim, 128 * self.init_size**2)
+        )
 
         self.conv_blocks0_0 = CategoricalConditionalBatchNorm2d(1000, 128)
 
@@ -80,7 +86,9 @@ class Generator_imagenet(nn.Module):
         self.conv_blocks2_0 = nn.Conv2d(128, 64, 3, stride=1, padding=1)
         self.conv_blocks2_1 = CategoricalConditionalBatchNorm2d(1000, 64, 0.8)
         self.conv_blocks2_2 = nn.LeakyReLU(0.2, inplace=True)
-        self.conv_blocks2_3 = nn.Conv2d(64, self.settings.channels, 3, stride=1, padding=1)
+        self.conv_blocks2_3 = nn.Conv2d(
+            64, self.settings.channels, 3, stride=1, padding=1
+        )
         self.conv_blocks2_4 = nn.Tanh()
         self.conv_blocks2_5 = nn.BatchNorm2d(self.settings.channels, affine=False)
 
@@ -103,26 +111,23 @@ class Generator_imagenet(nn.Module):
 
 
 class Generator_gowalla(nn.Module):
-    def __init__(self, options=None, conf_path=None) -> None:
+    def __init__(self, options, n_users, m_items, conf_path=None) -> None:
         self.settings = options or Option(conf_path)
         super(Generator_gowalla, self).__init__()
 
-        self.label_emb = nn.Embedding(self.settings.nClasses, self.settings.latent_dim)
-        self.l1 = nn.Sequential(nn.Linear(self.settings.latent_dim, 512))
-
-        self.conv_blocks0 = nn.Sequential(
-            nn.BatchNorm2d(128),
+        self.label_emb = nn.Linear(
+            self.settings.latent_dim_rec, self.settings.latent_dim_rec
         )
+        self.user_layer = nn.Linear(self.settings.latent_dim_rec, 1000)
+        self.item_layer = nn.Linear(self.settings.latent_dim_rec, 1000)
 
-        self.conv_blocks1 = nn.Sequential(
-            nn.Conv2d(512, 1, 3, stride=1, padding=1)
-        )
-
-    def forwoard(self, z, labels):
-        gen_input = torch.mul(self.label_emb(labels), z)
-        out = self.l1(gen_input)
-        user = self.conv_blocks1(out)
-        return user
+    def forward(self, z, labels):
+        gen_input = self.label_emb(z)
+        user_tensor = self.user_layer(gen_input)
+        item_tensor = self.item_layer(gen_input)
+        user = torch.argmax(user_tensor, dim=1)
+        item = torch.argmax(item_tensor, dim=1)
+        return user, item
 
 
 class ExperimentDesign:
@@ -141,8 +146,8 @@ class ExperimentDesign:
 
         self.unfreeze_Flag = True
 
-        os.environ['CUDA_DEVICE_ORDER'] = "PCI_BUS_ID"
-        os.environ['CUDA_VISIBLE_DEVICES'] = self.settings.visible_devices
+        os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+        os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
 
         self.settings.set_save_path()
         self.logger = self.set_logger()
@@ -151,11 +156,13 @@ class ExperimentDesign:
         self.prepare()
 
     def set_logger(self):
-        logger = logging.getLogger('baseline')
-        file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
-        console_formatter = logging.Formatter('%(message)s')
+        logger = logging.getLogger("baseline")
+        file_formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
+        console_formatter = logging.Formatter("%(message)s")
         # file log
-        file_handler = logging.FileHandler(os.path.join(self.settings.save_path, "train_test.log"))
+        file_handler = logging.FileHandler(
+            os.path.join(self.settings.save_path, "train_test.log")
+        )
         file_handler.setFormatter(file_formatter)
 
         # console log
@@ -185,12 +192,14 @@ class ExperimentDesign:
 
     def _set_dataloader(self):
         # create data loader
-        data_loader = DataLoader(dataset=self.settings.dataset,
-                                 batch_size=self.settings.batchSize,
-                                 data_path=self.settings.dataPath,
-                                 n_threads=self.settings.nThreads,
-                                 ten_crop=self.settings.tenCrop,
-                                 logger=self.logger)
+        data_loader = DataLoader(
+            dataset=self.settings.dataset,
+            batch_size=self.settings.batchSize,
+            data_path=self.settings.dataPath,
+            n_threads=self.settings.nThreads,
+            ten_crop=self.settings.tenCrop,
+            logger=self.logger,
+        )
 
         self.train_loader, self.test_loader = data_loader.getloader()
 
@@ -204,23 +213,35 @@ class ExperimentDesign:
             if self.settings.network in ["resnet20_cifar100", "resnet20_cifar10"]:
                 self.test_input = Variable(torch.randn(1, 3, 32, 32).cuda())
                 self.model = ptcv_get_model(self.settings.network, pretrained=True)
-                self.model_teacher = ptcv_get_model(self.settings.network, pretrained=True)
+                self.model_teacher = ptcv_get_model(
+                    self.settings.network, pretrained=True
+                )
                 self.model_teacher.eval()
 
         elif self.settings.dataset in ["imagenet"]:
             if self.settings.network in ["resnet18", "mobilenetv2_w1", "resnet50"]:
                 self.test_input = Variable(torch.randn(1, 3, 224, 224).cuda())
                 self.model = ptcv_get_model(self.settings.network, pretrained=True)
-                self.model_teacher = ptcv_get_model(self.settings.network, pretrained=True)
+                self.model_teacher = ptcv_get_model(
+                    self.settings.network, pretrained=True
+                )
                 self.model_teacher.eval()
 
         elif self.settings.dataset in ["gowalla"]:
             if self.settings.network in ["lightgcn"]:
                 self.test_input = Variable(torch.randn(1, 3).cuda())
-                self.model = gnn_get_model(self.settings.network, pretrained=True, settings=self.settings,
-                                           dataset=self.gnn_loader)
-                self.model_teacher = gnn_get_model(self.settings.network, pretrained=True, settings=self.settings,
-                                                   dataset=self.gnn_loader)
+                self.model = gnn_get_model(
+                    self.settings.network,
+                    pretrained=True,
+                    settings=self.settings,
+                    dataset=self.gnn_loader,
+                )
+                self.model_teacher = gnn_get_model(
+                    self.settings.network,
+                    pretrained=True,
+                    settings=self.settings,
+                    dataset=self.gnn_loader,
+                )
                 self.model_teacher.eval()
 
         else:
@@ -228,46 +249,60 @@ class ExperimentDesign:
 
     def _set_trainer(self):
         # set lr master
-        lr_master_S = utils.LRPolicy(self.settings.lr_S,
-                                     self.settings.nEpochs,
-                                     self.settings.lrPolicy_S)
-        lr_master_G = utils.LRPolicy(self.settings.lr_G,
-                                     self.settings.nEpochs,
-                                     self.settings.lrPolicy_G)
+        lr_master_S = utils.LRPolicy(
+            self.settings.lr_S, self.settings.nEpochs, self.settings.lrPolicy_S
+        )
+        lr_master_G = utils.LRPolicy(
+            self.settings.lr_G, self.settings.nEpochs, self.settings.lrPolicy_G
+        )
 
         params_dict_S = {
-            'step': self.settings.step_S,
-            'decay_rate': self.settings.decayRate_S
+            "step": self.settings.step_S,
+            "decay_rate": self.settings.decayRate_S,
         }
 
         params_dict_G = {
-            'step': self.settings.step_G,
-            'decay_rate': self.settings.decayRate_G
+            "step": self.settings.step_G,
+            "decay_rate": self.settings.decayRate_G,
         }
 
         lr_master_S.set_params(params_dict=params_dict_S)
         lr_master_G.set_params(params_dict=params_dict_G)
 
         # set trainer
-        self.trainer = Trainer(
+        # self.trainer = Trainer(
+        #     model=self.model,
+        #     model_teacher=self.model_teacher,
+        #     generator=self.generator,
+        #     train_loader=self.train_loader,
+        #     test_loader=self.test_loader,
+        #     lr_master_S=lr_master_S,
+        #     lr_master_G=lr_master_G,
+        #     settings=self.settings,
+        #     logger=self.logger,
+        #     opt_type=self.settings.opt_type,
+        #     optimizer_state=self.optimizer_state,
+        #     run_count=self.start_epoch,
+        # )
+
+        self.trainer = GnnTrainer(
             model=self.model,
             model_teacher=self.model_teacher,
             generator=self.generator,
-            train_loader=self.train_loader,
-            test_loader=self.test_loader,
+            dataset=self.gnn_loader,
+            settings=self.settings,
+            loss_class=BPRLoss,
             lr_master_S=lr_master_S,
             lr_master_G=lr_master_G,
-            settings=self.settings,
             logger=self.logger,
-            opt_type=self.settings.opt_type,
-            optimizer_state=self.optimizer_state,
-            run_count=self.start_epoch)
+            run_count=self.start_epoch,
+        )
 
     def quantize_model(self, model):
         """
-		Recursively quantize a pretrained single-precision model to int8 quantized model
-		model: pretrained single-precision model
-		"""
+        Recursively quantize a pretrained single-precision model to int8 quantized model
+        model: pretrained single-precision model
+        """
 
         weight_bit = self.settings.qw
         act_bit = self.settings.qa
@@ -304,7 +339,7 @@ class ExperimentDesign:
             q_model = copy.deepcopy(model)
             for attr in dir(model):
                 mod = getattr(model, attr)
-                if isinstance(mod, nn.Module) and 'norm' not in attr:
+                if isinstance(mod, nn.Module) and "norm" not in attr:
                     setattr(q_model, attr, self.quantize_model(mod))
 
                 # if attr == "embedding_user":
@@ -317,8 +352,8 @@ class ExperimentDesign:
 
     def freeze_model(self, model):
         """
-		freeze the activation range
-		"""
+        freeze the activation range
+        """
         if type(model) == QuantAct:
             model.fix()
         elif type(model) == nn.Sequential:
@@ -327,14 +362,14 @@ class ExperimentDesign:
         else:
             for attr in dir(model):
                 mod = getattr(model, attr)
-                if isinstance(mod, nn.Module) and 'norm' not in attr:
+                if isinstance(mod, nn.Module) and "norm" not in attr:
                     self.freeze_model(mod)
             return model
 
     def unfreeze_model(self, model):
         """
-		unfreeze the activation range
-		"""
+        unfreeze the activation range
+        """
         if type(model) == QuantAct:
             model.unfix()
         elif type(model) == nn.Sequential:
@@ -343,7 +378,7 @@ class ExperimentDesign:
         else:
             for attr in dir(model):
                 mod = getattr(model, attr)
-                if isinstance(mod, nn.Module) and 'norm' not in attr:
+                if isinstance(mod, nn.Module) and "norm" not in attr:
                     self.unfreeze_model(mod)
             return model
 
@@ -352,7 +387,7 @@ class ExperimentDesign:
         best_top5 = 100
         start_time = time.time()
 
-        test_error, test_loss, test5_error = self.trainer.test_teacher(0)
+        # test_error, test_loss, test5_error = self.trainer.test_teacher(0)
 
         try:
             for epoch in range(self.start_epoch, self.settings.nEpochs):
@@ -371,7 +406,9 @@ class ExperimentDesign:
                     test_error, test_loss, test5_error = self.trainer.test(epoch=epoch)
                 elif self.settings.dataset in ["imagenet"]:
                     if epoch > self.settings.warmup_epochs - 2:
-                        test_error, test_loss, test5_error = self.trainer.test(epoch=epoch)
+                        test_error, test_loss, test5_error = self.trainer.test(
+                            epoch=epoch
+                        )
                     else:
                         test_error = 100
                         test5_error = 100
@@ -382,28 +419,42 @@ class ExperimentDesign:
                     best_top1 = test_error
                     best_top5 = test5_error
 
-                self.logger.info("#==>Best Result is: Top1 Error: {:f}, Top5 Error: {:f}".format(best_top1, best_top5))
-                self.logger.info("#==>Best Result is: Top1 Accuracy: {:f}, Top5 Accuracy: {:f}".format(100 - best_top1,
-                                                                                                       100 - best_top5))
+                self.logger.info(
+                    "#==>Best Result is: Top1 Error: {:f}, Top5 Error: {:f}".format(
+                        best_top1, best_top5
+                    )
+                )
+                self.logger.info(
+                    "#==>Best Result is: Top1 Accuracy: {:f}, Top5 Accuracy: {:f}".format(
+                        100 - best_top1, 100 - best_top5
+                    )
+                )
 
         except BaseException as e:
-            self.logger.error("Training is terminating due to exception: {}".format(str(e)))
+            self.logger.error(
+                "Training is terminating due to exception: {}".format(str(e))
+            )
             traceback.print_exc()
 
         end_time = time.time()
         time_interval = end_time - start_time
-        t_string = "Running Time is: " + str(datetime.timedelta(seconds=time_interval)) + "\n"
+        t_string = (
+            "Running Time is: " + str(datetime.timedelta(seconds=time_interval)) + "\n"
+        )
         self.logger.info(t_string)
 
         return best_top1, best_top5
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Baseline')
-    parser.add_argument('--conf_path', type=str, metavar='conf_path',
-                        help='input the path of config file')
-    parser.add_argument('--id', type=int, metavar='experiment_id',
-                        help='Experiment ID')
+    parser = argparse.ArgumentParser(description="Baseline")
+    parser.add_argument(
+        "--conf_path",
+        type=str,
+        metavar="conf_path",
+        help="input the path of config file",
+    )
+    parser.add_argument("--id", type=int, metavar="experiment_id", help="Experiment ID")
     args = parser.parse_args()
 
     option = Option(args.conf_path)
@@ -415,7 +466,8 @@ def main():
     elif option.dataset in ["imagenet"]:
         generator = Generator_imagenet(option)
     elif option.dataset in ["gowalla"]:
-        generator = Generator_gowalla(option)
+        data_loader = Loader(option)
+        generator = Generator_gowalla(option, data_loader.n_users, data_loader.m_items)
     else:
         assert False, "invalid data set"
 
@@ -423,5 +475,5 @@ def main():
     experiment.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

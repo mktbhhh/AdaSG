@@ -1,4 +1,4 @@
-__all__ = ['LightGCN', 'lightgcn']
+__all__ = ["LightGCN", "lightgcn"]
 
 """
 Created on Mar 1, 2020
@@ -27,9 +27,7 @@ class BasicModel(nn.Module):
 
 
 class LightGCN(BasicModel):
-    def __init__(self,
-                 config,
-                 dataset: BasicDataset):
+    def __init__(self, config, dataset: BasicDataset):
         super(LightGCN, self).__init__()
 
         self.config = config
@@ -44,9 +42,11 @@ class LightGCN(BasicModel):
         self.keep_prob = self.config.keep_prob
         self.A_split = self.config.A_split
         self.embedding_user = torch.nn.Embedding(
-            num_embeddings=self.num_users, embedding_dim=self.latent_dim)
+            num_embeddings=self.num_users, embedding_dim=self.latent_dim
+        )
         self.embedding_item = torch.nn.Embedding(
-            num_embeddings=self.num_items, embedding_dim=self.latent_dim)
+            num_embeddings=self.num_items, embedding_dim=self.latent_dim
+        )
         if self.config.pretrain == 0:
             #             nn.init.xavier_uniform_(self.embedding_user.weight, gain=1)
             #             nn.init.xavier_uniform_(self.embedding_item.weight, gain=1)
@@ -54,11 +54,15 @@ class LightGCN(BasicModel):
             # random normal init seems to be a better choice when lightGCN actually don't use any non-linear activation function
             nn.init.normal_(self.embedding_user.weight, std=0.1)
             nn.init.normal_(self.embedding_item.weight, std=0.1)
-            world.cprint('use NORMAL distribution initilizer')
+            world.cprint("use NORMAL distribution initilizer")
         else:
-            self.embedding_user.weight.data.copy_(torch.from_numpy(self.config['user_emb']))
-            self.embedding_item.weight.data.copy_(torch.from_numpy(self.config['item_emb']))
-            print('use pretarined data')
+            self.embedding_user.weight.data.copy_(
+                torch.from_numpy(self.config["user_emb"])
+            )
+            self.embedding_item.weight.data.copy_(
+                torch.from_numpy(self.config["item_emb"])
+            )
+            print("use pretarined data")
         self.f = nn.Sigmoid()
         self.Graph = self.dataset.getSparseGraph()
         print(f"lgn is already to go(dropout:{self.config.dropout})")
@@ -94,7 +98,7 @@ class LightGCN(BasicModel):
         all_emb = torch.cat([users_emb, items_emb])
         #   torch.split(all_emb , [self.num_users, self.num_items])
         embs = [all_emb]
-        if self.config['dropout']:
+        if self.config.dropout:
             if self.training:
                 print("droping")
                 g_droped = self.__dropout(self.keep_prob)
@@ -126,6 +130,12 @@ class LightGCN(BasicModel):
         rating = self.f(torch.matmul(users_emb, items_emb.t()))
         return rating
 
+    def getUserItemScore(self, userid, itemid):
+        all_users, all_items = self.computer()
+        users_emb = all_users[userid.long()]
+        items_emb = all_items[itemid.long()]
+        return self.f(torch.mul(users_emb, items_emb))
+
     def getEmbedding(self, users, pos_items, neg_items):
         all_users, all_items = self.computer()
         users_emb = all_users[users]
@@ -137,11 +147,18 @@ class LightGCN(BasicModel):
         return users_emb, pos_emb, neg_emb, users_emb_ego, pos_emb_ego, neg_emb_ego
 
     def bpr_loss(self, users, pos, neg):
-        (users_emb, pos_emb, neg_emb,
-         userEmb0, posEmb0, negEmb0) = self.getEmbedding(users.long(), pos.long(), neg.long())
-        reg_loss = (1 / 2) * (userEmb0.norm(2).pow(2) +
-                              posEmb0.norm(2).pow(2) +
-                              negEmb0.norm(2).pow(2)) / float(len(users))
+        (users_emb, pos_emb, neg_emb, userEmb0, posEmb0, negEmb0) = self.getEmbedding(
+            users.long(), pos.long(), neg.long()
+        )
+        reg_loss = (
+            (1 / 2)
+            * (
+                userEmb0.norm(2).pow(2)
+                + posEmb0.norm(2).pow(2)
+                + negEmb0.norm(2).pow(2)
+            )
+            / float(len(users))
+        )
         pos_scores = torch.mul(users_emb, pos_emb)
         pos_scores = torch.sum(pos_scores, dim=1)
         neg_scores = torch.mul(users_emb, neg_emb)
@@ -163,33 +180,37 @@ class LightGCN(BasicModel):
         return gamma
 
 
-MODELS = {
-    'lgn': LightGCN
-}
+MODELS = {"lgn": LightGCN}
 
 
 def getFileName(option, root):
-    if option.model_name == 'mf':
+    if option.model_name == "mf":
         file = f"mf-{option.dataset}-{option.latent_dim_rec}.pth.tar"
-    elif option.model_name == 'lgn':
+    elif option.model_name == "lgn":
         file = f"lgn-{option.dataset}-{option.lightGCN_n_layers}-{option.latent_dim_rec}.pth.tar"
     return os.path.join(root, file)
 
 
-def get_lightgcn(model_name=None, pretrained=True, root=os.path.join("pretrained"), **kwargs):
-    dataset = kwargs['dataset']
-    settings = kwargs['settings']
+def get_lightgcn(
+    model_name=None, pretrained=True, root=os.path.join("pretrained"), **kwargs
+):
+    dataset = kwargs["dataset"]
+    settings = kwargs["settings"]
 
     if pretrained:
         if (model_name is None) or (not model_name):
-            raise ValueError("Parameter `model_name` should be properly initialized for loading pretrained model.")
+            raise ValueError(
+                "Parameter `model_name` should be properly initialized for loading pretrained model."
+            )
 
         # dataset = dataloader.Loader(settings, path="dataset_path/"+world.dataset)
         Recmodel = MODELS[world.model_name](settings, dataset)
         Recmodel = Recmodel.to(world.device)
 
         weight_file = getFileName(settings, root)
-        Recmodel.load_state_dict(torch.load(weight_file, map_location=torch.device('cpu')))
+        Recmodel.load_state_dict(
+            torch.load(weight_file, map_location=torch.device("cpu"))
+        )
 
     return Recmodel
 

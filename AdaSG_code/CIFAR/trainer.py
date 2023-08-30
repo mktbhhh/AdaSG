@@ -14,7 +14,7 @@ from torch import optim
 
 import math
 
-__all__ = ["Trainer"]
+__all__ = ["Trainer", "GnnTrainer"]
 
 
 def compute_entropy(p_logit, T):
@@ -43,7 +43,7 @@ class GnnTrainer(object):
     trainer for training gnn network
     """
 
-    def __int__(
+    def __init__(
         self,
         model,
         model_teacher,
@@ -54,6 +54,7 @@ class GnnTrainer(object):
         lr_master_S,
         lr_master_G,
         logger,
+        run_count=0,
         tensorboard_logger=None,
     ):
         """
@@ -70,21 +71,26 @@ class GnnTrainer(object):
         """
         self.settings = settings
 
-        self.model = utils.data_parallel(model, self.settings.nGPU, self.settings.GPU)
-        self.model_teacher = utils.data_parallel(
-            model_teacher, self.settings.nGPU, self.settings.GPU
-        )
+        # self.model = utils.data_parallel(model, self.settings.nGPU, self.settings.GPU)
+        self.model = model.cuda()
+        # self.model_teacher = utils.data_parallel(
+        #     model_teacher, self.settings.nGPU, self.settings.GPU
+        # )
+        self.model_teacher = model_teacher.cuda()
 
-        self.generator = utils.data_parallel(
-            generator, self.settings.nGPU, self.settings.GPU
-        )
+        # self.generator = utils.data_parallel(
+        #     generator, self.settings.nGPU, self.settings.GPU
+        # )
+        self.generator = generator.cuda()
 
         self.tensorboard_logger = tensorboard_logger
         self.bpr = loss_class
         self.lr_master_S = lr_master_S
         self.lr_master_G = lr_master_G
 
-        self.optimizer_S = optim.Adam(model.parameters(), lr=self.lr_master_S)
+        self.optimizer_S = optim.Adam(
+            model_teacher.parameters(), lr=self.lr_master_S.lr
+        )
 
         self.optimizer_G = torch.optim.Adam(
             self.generator.parameters(),
@@ -93,6 +99,14 @@ class GnnTrainer(object):
         )
 
         self.logger = logger
+        self.run_count = run_count
+        self.scalar_info = {}
+        self.mean_list = []
+        self.var_list = []
+        self.teacher_running_mean = []
+        self.teacher_running_var = []
+        self.save_BN_mean = []
+        self.save_BN_var = []
 
     def update_lr(self, epoch):
         """
@@ -118,12 +132,12 @@ class GnnTrainer(object):
 
         return q_loss
 
-    def forward(self, images, teacher_outputs, labels=None, linear=None):
+    def forward(self, gen_user, gen_item, teacher_outputs, labels=None, linear=None):
         """
         forward propagation
         """
         # forward and backward and optimize
-        output, output_1 = self.model(images, True)
+        output = self.model.getUserItemScore(gen_user, gen_item)
         if labels is not None:
             loss = self.loss_fn_kd(output, labels, teacher_outputs, linear)
             return output, loss
@@ -163,6 +177,10 @@ class GnnTrainer(object):
         """
         training
         """
+        top1_error = utils.AverageMeter()
+        top1_loss = utils.AverageMeter()
+        fp_acc = utils.AverageMeter()
+
         iters = 200
         self.update_lr(epoch)
 
@@ -183,7 +201,7 @@ class GnnTrainer(object):
             data_time = start_time - end_time
 
             z = Variable(
-                torch.randn(self.settings.batchSize, self.settings.latent_dim)
+                torch.randn(self.settings.batchSize, self.settings.latent_dim_rec)
             ).cuda()
 
             # Get labels ranging from 0 to n_classes for n rows
@@ -193,8 +211,100 @@ class GnnTrainer(object):
             z = z.contiguous()
             labels = labels.contiguous()
 
-            pairs = self.generator(z, labels)
+            gen_user, gen_item = self.generator(z, labels)
 
+            labels_loss = Variable(
+                torch.zeros(self.settings.batchSize, self.settings.nClasses)
+            ).cuda()
+            labels_loss.scatter_(1, labels.unsqueeze(1), 1.0)
+
+            self.mean_list.clear()
+            self.var_list.clear()
+
+            output_teacher_batch = self.model_teacher.getUserItemScore(
+                gen_user, gen_item
+            )
+            output = self.model.getUserItemScore(gen_user, gen_item)
+
+            # generation loss
+            z_ds = output_teacher_batch - output
+            z_as = output_teacher_batch + output
+            loss_ds = ((-(labels_loss * self.log_soft(z_ds)).sum(dim=1))).mean()
+            loss_as = ((-(labels_loss * self.log_soft(z_as)).sum(dim=1))).mean()
+            loss_onehot = 0.1 * loss_ds + 0.1 * loss_as
+            h_loss = marginal_loss(output_teacher_batch, output, self.settings.nClasses)
+
+            # BN statistic loss
+            BNS_loss = torch.zeros(1).cuda()
+            for num in range(len(self.mean_list)):
+                BNS_loss += self.MSE_loss(
+                    self.mean_list[num], self.teacher_running_mean[num]
+                ) + self.MSE_loss(self.var_list[num], self.teacher_running_var[num])
+            BNS_loss = BNS_loss / len(self.mean_list)
+
+            # loss of Generator
+            loss_G = h_loss + loss_onehot + BNS_loss
+            self.backward_G(loss_G)
+
+            output, loss_S = self.forward(
+                gen_user.detach(),
+                gen_item.detach(),
+                output_teacher_batch.detach(),
+                labels,
+                linear=labels_loss,
+            )
+            if epoch >= self.settings.warmup_epochs:
+                self.backward_S(loss_S)
+
+            single_error, single_loss, single5_error = utils.compute_singlecrop(
+                outputs=output,
+                labels=labels,
+                loss=loss_S,
+                top5_flag=True,
+                mean_flag=True,
+            )
+
+            top1_error.update(single_error, 1)
+            top1_loss.update(single_loss, 1)
+
+            end_time = time.time()
+
+            gt = labels.data.cpu().numpy()
+            d_acc = np.mean(
+                np.argmax(output_teacher_batch.data.cpu().numpy(), axis=1) == gt
+            )
+
+            fp_acc.update(d_acc)
+
+        print(
+            "[Epoch %d/%d] [Batch %d/%d] [acc: %.4f%%] [G loss: %f] [Balance loss: %f] [BNS_loss:%f] [S loss: %f] "
+            % (
+                epoch + 1,
+                self.settings.nEpochs,
+                i + 1,
+                iters,
+                100 * fp_acc.avg,
+                loss_G.item(),
+                loss_onehot.item(),
+                BNS_loss.item(),
+                loss_S.item(),
+            )
+        )
+
+        self.scalar_info["accuracy every epoch"] = 100 * d_acc
+        self.scalar_info["G loss every epoch"] = loss_G
+        self.scalar_info["One-hot loss every epoch"] = loss_onehot
+        self.scalar_info["S loss every epoch"] = loss_S
+
+        self.scalar_info["training_top1error"] = top1_error.avg
+        self.scalar_info["training_loss"] = top1_loss.avg
+
+        if self.tensorboard_logger is not None:
+            for tag, value in list(self.scalar_info.items()):
+                self.tensorboard_logger.scalar_summary(tag, value, self.run_count)
+            self.scalar_info = {}
+
+        return top1_error.avg, top1_loss.avg
 
 
 class Trainer(object):
