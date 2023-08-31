@@ -8,9 +8,12 @@ import sys
 import copy
 import torch
 import torch.backends.cudnn as cudnn
+from tensorboardX import SummaryWriter
+from os.path import join
 from torch.autograd import Variable
 import torch.nn as nn
 
+import world
 # option file should be modified according to your expriment
 from options import Option
 
@@ -115,14 +118,14 @@ class Generator_gowalla(nn.Module):
         self.settings = options or Option(conf_path)
         super(Generator_gowalla, self).__init__()
 
-        self.label_emb = nn.Linear(
+        self.label_emb = nn.Embedding(
             self.settings.latent_dim_rec, self.settings.latent_dim_rec
         )
-        self.user_layer = nn.Linear(self.settings.latent_dim_rec, 1000)
-        self.item_layer = nn.Linear(self.settings.latent_dim_rec, 1000)
+        self.user_layer = nn.Linear(self.settings.latent_dim_rec, n_users)
+        self.item_layer = nn.Linear(self.settings.latent_dim_rec, m_items)
 
     def forward(self, z, labels):
-        gen_input = self.label_emb(z)
+        gen_input = torch.mul(self.label_emb(labels), z)
         user_tensor = self.user_layer(gen_input)
         item_tensor = self.item_layer(gen_input)
         user = torch.argmax(user_tensor, dim=1)
@@ -147,7 +150,7 @@ class ExperimentDesign:
         self.unfreeze_Flag = True
 
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-        os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
+        # os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
 
         self.settings.set_save_path()
         self.logger = self.set_logger()
@@ -329,11 +332,14 @@ class ExperimentDesign:
             return nn.Sequential(*mods)
 
         elif type(model) == nn.Embedding:
-            model.qconfig = torch.ao.quantization.float_qparams_weight_only_qconfig
-            model.cpu()
-            quant_mod = torch.ao.nn.quantized.Embedding.from_float(model)
-            quant_mod.cuda()
+            quant_mod = Quant_Embedding(weight_bit=weight_bit)
+            quant_mod.set_param(model)
             return quant_mod
+            # model.qconfig = torch.ao.quantization.float_qparams_weight_only_qconfig
+            # model.cpu()
+            # quant_mod = torch.ao.nn.quantized.Embedding.from_float(model)
+            # quant_mod.cuda()
+            # return quant_mod
 
         else:
             q_model = copy.deepcopy(model)
@@ -383,11 +389,15 @@ class ExperimentDesign:
             return model
 
     def run(self):
-        best_top1 = 100
-        best_top5 = 100
+        best_precision = 0
         start_time = time.time()
 
-        # test_error, test_loss, test5_error = self.trainer.test_teacher(0)
+        if world.tensorboard:
+            w: SummaryWriter = SummaryWriter(
+                join("./runs", time.strftime("%m-%d-%Hh%Mm%Ss-") + "-" + world.comment)
+            )
+
+        results = self.trainer.test_teacher(self.gnn_loader, 0, w)
 
         try:
             for epoch in range(self.start_epoch, self.settings.nEpochs):
@@ -398,7 +408,7 @@ class ExperimentDesign:
                     print("\n self.unfreeze_model(self.model)\n")
                     self.unfreeze_model(self.model)
 
-                train_error, train_loss, train5_error = self.trainer.train(epoch=epoch)
+                results = self.trainer.train(epoch=epoch)
 
                 self.freeze_model(self.model)
 
@@ -412,21 +422,17 @@ class ExperimentDesign:
                     else:
                         test_error = 100
                         test5_error = 100
+                elif self.settings.dataset in ["gowalla"]:
+                    results = self.trainer.test(self.gnn_loader, epoch, w)
                 else:
                     assert False, "invalid data set"
 
-                if best_top1 >= test_error:
-                    best_top1 = test_error
-                    best_top5 = test5_error
+                if best_precision < results['precision'][0]:
+                    best_precision = results['precision'][0]
 
                 self.logger.info(
-                    "#==>Best Result is: Top1 Error: {:f}, Top5 Error: {:f}".format(
-                        best_top1, best_top5
-                    )
-                )
-                self.logger.info(
-                    "#==>Best Result is: Top1 Accuracy: {:f}, Top5 Accuracy: {:f}".format(
-                        100 - best_top1, 100 - best_top5
+                    "#==>Best Result is: Topk10 Accuracy: {:f}".format(
+                        results['precision'][0]
                     )
                 )
 
@@ -443,7 +449,7 @@ class ExperimentDesign:
         )
         self.logger.info(t_string)
 
-        return best_top1, best_top5
+        return best_precision
 
 
 def main():

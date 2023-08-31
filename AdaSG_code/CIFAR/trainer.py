@@ -13,8 +13,12 @@ import torch
 from torch import optim
 
 import math
+import world
+import multiprocessing
 
 __all__ = ["Trainer", "GnnTrainer"]
+
+from utils import gnn_utils
 
 
 def compute_entropy(p_logit, T):
@@ -88,9 +92,8 @@ class GnnTrainer(object):
         self.lr_master_S = lr_master_S
         self.lr_master_G = lr_master_G
 
-        self.optimizer_S = optim.Adam(
-            model_teacher.parameters(), lr=self.lr_master_S.lr
-        )
+        self.optimizer_S = optim.Adam(model.parameters(), lr=self.lr_master_S.lr)
+        self.log_soft = nn.LogSoftmax(dim=1)
 
         self.optimizer_G = torch.optim.Adam(
             self.generator.parameters(),
@@ -206,7 +209,7 @@ class GnnTrainer(object):
 
             # Get labels ranging from 0 to n_classes for n rows
             labels = Variable(
-                torch.randint(0, self.settings.nClasses, (self.settings.batchSize,))
+                torch.randint(0, self.settings.latent_dim_rec, (self.settings.batchSize,))
             ).cuda()
             z = z.contiguous()
             labels = labels.contiguous()
@@ -214,7 +217,7 @@ class GnnTrainer(object):
             gen_user, gen_item = self.generator(z, labels)
 
             labels_loss = Variable(
-                torch.zeros(self.settings.batchSize, self.settings.nClasses)
+                torch.zeros(self.settings.batchSize, self.settings.latent_dim_rec)
             ).cuda()
             labels_loss.scatter_(1, labels.unsqueeze(1), 1.0)
 
@@ -305,6 +308,207 @@ class GnnTrainer(object):
             self.scalar_info = {}
 
         return top1_error.avg, top1_loss.avg
+
+    def test_one_batch(self, X):
+        sorted_items = X[0].numpy()
+        groundTrue = X[1]
+        r = gnn_utils.getLabel(groundTrue, sorted_items)
+        pre, recall, ndcg = [], [], []
+        for k in world.topks:
+            ret = gnn_utils.RecallPrecision_ATk(groundTrue, r, k)
+            pre.append(ret['precision'])
+            recall.append(ret['recall'])
+            ndcg.append(gnn_utils.NDCGatK_r(groundTrue, r, k))
+        return {'recall': np.array(recall),
+                'precision': np.array(pre),
+                'ndcg': np.array(ndcg)}
+
+    def test(self, dataset, epoch, w=None, multicore=0):
+        """
+        testing
+        """
+        CORES = multiprocessing.cpu_count() // 2
+        u_batch_size = world.test_u_batch_size
+        testDict: dict = dataset.testDict
+        # eval mode with no dropout
+        self.model.eval()
+        max_K = max(world.topks)
+        if multicore == 1:
+            pool = multiprocessing.Pool(CORES)
+        results = {'precision': np.zeros(len(world.topks)),
+                   'recall': np.zeros(len(world.topks)),
+                   'ndcg': np.zeros(len(world.topks))}
+        with torch.no_grad():
+            users = list(testDict.keys())
+            try:
+                assert u_batch_size <= len(users) / 10
+            except AssertionError:
+                print(f"test_u_batch_size is too big for this dataset, try a small one {len(users) // 10}")
+            users_list = []
+            rating_list = []
+            groundTrue_list = []
+            # auc_record = []
+            # ratings = []
+            total_batch = len(users) // u_batch_size + 1
+            for batch_users in gnn_utils.minibatch(users, batch_size=u_batch_size):
+                allPos = dataset.getUserPosItems(batch_users)
+                groundTrue = [testDict[u] for u in batch_users]
+                batch_users_gpu = torch.Tensor(batch_users).long()
+                batch_users_gpu = batch_users_gpu.to(world.device)
+
+                rating = self.model.getUsersRating(batch_users_gpu)
+                # rating = rating.cpu()
+                exclude_index = []
+                exclude_items = []
+                for range_i, items in enumerate(allPos):
+                    exclude_index.extend([range_i] * len(items))
+                    exclude_items.extend(items)
+                rating[exclude_index, exclude_items] = -(1 << 10)
+                _, rating_K = torch.topk(rating, k=max_K)
+                rating = rating.cpu().numpy()
+                # aucs = [
+                #         utils.AUC(rating[i],
+                #                   dataset,
+                #                   test_data) for i, test_data in enumerate(groundTrue)
+                #     ]
+                # auc_record.extend(aucs)
+                del rating
+                users_list.append(batch_users)
+                rating_list.append(rating_K.cpu())
+                groundTrue_list.append(groundTrue)
+            assert total_batch == len(users_list)
+            X = zip(rating_list, groundTrue_list)
+            if multicore == 1:
+                pre_results = pool.map(self.test_one_batch, X)
+            else:
+                pre_results = []
+                for x in X:
+                    pre_results.append(self.test_one_batch(x))
+            scale = float(u_batch_size / len(users))
+            for result in pre_results:
+                results['recall'] += result['recall']
+                results['precision'] += result['precision']
+                results['ndcg'] += result['ndcg']
+            results['recall'] /= float(len(users))
+            results['precision'] /= float(len(users))
+            results['ndcg'] /= float(len(users))
+            # results['auc'] = np.mean(auc_record)
+            if world.tensorboard:
+                w.add_scalars(f'Test/Recall@{world.topks}',
+                              {str(world.topks[i]): results['recall'][i] for i in range(len(world.topks))}, epoch)
+                w.add_scalars(f'Test/Precision@{world.topks}',
+                              {str(world.topks[i]): results['precision'][i] for i in range(len(world.topks))}, epoch)
+                w.add_scalars(f'Test/NDCG@{world.topks}',
+                              {str(world.topks[i]): results['ndcg'][i] for i in range(len(world.topks))}, epoch)
+            if multicore == 1:
+                pool.close()
+            print(results)
+
+        # print(
+        #     "[Epoch %d/%d] [precision: %.4f%%]"
+        #     % (
+        #         epoch + 1,
+        #         self.settings.nEpochs,
+        #         results['precision'][0],
+        #     )
+        # )
+        self.run_count += 1
+
+        return results
+
+    def test_teacher(self, dataset, epoch, w=None, multicore=0):
+        """
+        testing
+        """
+        CORES = multiprocessing.cpu_count() // 2
+        u_batch_size = world.test_u_batch_size
+        testDict: dict = dataset.testDict
+        # eval mode with no dropout
+        self.model_teacher.eval()
+        max_K = max(world.topks)
+        if multicore == 1:
+            pool = multiprocessing.Pool(CORES)
+        results = {'precision': np.zeros(len(world.topks)),
+                   'recall': np.zeros(len(world.topks)),
+                   'ndcg': np.zeros(len(world.topks))}
+        with torch.no_grad():
+            users = list(testDict.keys())
+            try:
+                assert u_batch_size <= len(users) / 10
+            except AssertionError:
+                print(f"test_u_batch_size is too big for this dataset, try a small one {len(users) // 10}")
+            users_list = []
+            rating_list = []
+            groundTrue_list = []
+            # auc_record = []
+            # ratings = []
+            total_batch = len(users) // u_batch_size + 1
+            for batch_users in gnn_utils.minibatch(users, batch_size=u_batch_size):
+                allPos = dataset.getUserPosItems(batch_users)
+                groundTrue = [testDict[u] for u in batch_users]
+                batch_users_gpu = torch.Tensor(batch_users).long()
+                batch_users_gpu = batch_users_gpu.to(world.device)
+
+                rating = self.model_teacher.getUsersRating(batch_users_gpu)
+                # rating = rating.cpu()
+                exclude_index = []
+                exclude_items = []
+                for range_i, items in enumerate(allPos):
+                    exclude_index.extend([range_i] * len(items))
+                    exclude_items.extend(items)
+                rating[exclude_index, exclude_items] = -(1 << 10)
+                _, rating_K = torch.topk(rating, k=max_K)
+                rating = rating.cpu().numpy()
+                # aucs = [
+                #         utils.AUC(rating[i],
+                #                   dataset,
+                #                   test_data) for i, test_data in enumerate(groundTrue)
+                #     ]
+                # auc_record.extend(aucs)
+                del rating
+                users_list.append(batch_users)
+                rating_list.append(rating_K.cpu())
+                groundTrue_list.append(groundTrue)
+            assert total_batch == len(users_list)
+            X = zip(rating_list, groundTrue_list)
+            if multicore == 1:
+                pre_results = pool.map(self.test_one_batch, X)
+            else:
+                pre_results = []
+                for x in X:
+                    pre_results.append(self.test_one_batch(x))
+            scale = float(u_batch_size / len(users))
+            for result in pre_results:
+                results['recall'] += result['recall']
+                results['precision'] += result['precision']
+                results['ndcg'] += result['ndcg']
+            results['recall'] /= float(len(users))
+            results['precision'] /= float(len(users))
+            results['ndcg'] /= float(len(users))
+            # results['auc'] = np.mean(auc_record)
+            if world.tensorboard:
+                w.add_scalars(f'Test/Recall@{world.topks}',
+                              {str(world.topks[i]): results['recall'][i] for i in range(len(world.topks))}, epoch)
+                w.add_scalars(f'Test/Precision@{world.topks}',
+                              {str(world.topks[i]): results['precision'][i] for i in range(len(world.topks))}, epoch)
+                w.add_scalars(f'Test/NDCG@{world.topks}',
+                              {str(world.topks[i]): results['ndcg'][i] for i in range(len(world.topks))}, epoch)
+            if multicore == 1:
+                pool.close()
+            print(results)
+
+        # print(
+        #     "[Epoch %d/%d] [precision: %.4f%%]"
+        #     % (
+        #         epoch + 1,
+        #         self.settings.nEpochs,
+        #         results['precision'][0],
+        #     )
+        # )
+        self.run_count += 1
+
+        return results
+
 
 
 class Trainer(object):

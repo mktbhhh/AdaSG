@@ -1,4 +1,4 @@
-__all__ = ["LightGCN", "lightgcn"]
+# __all__ = ["LightGCN", "lightgcn"]
 
 """
 Created on Mar 1, 2020

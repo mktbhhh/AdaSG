@@ -94,7 +94,7 @@ class Option(NetOption):
             self.nClasses = 10
         elif self.dataset == "cifar100":
             self.nClasses = 100
-        elif self.dataset == "imagenet" or "thi_imgnet":
+        elif self.dataset == "imagenet":
             self.nClasses = 1000
         elif self.dataset == "imagenet100":
             self.nClasses = 100
