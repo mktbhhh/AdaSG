@@ -221,6 +221,7 @@ class Quant_Embedding(Module):
         """
         super(Quant_Embedding, self).__init__()
 
+        self.full_weight = None
         self.full_precision_flag = full_precision_flag
         self.weight_bit = weight_bit
         self.weight_function = AsymmetricQuantFunction.apply
@@ -250,7 +251,11 @@ class Quant_Embedding(Module):
         self.num_embeddings = embedding.num_embeddings
         self.embeding_dim = embedding.embedding_dim
         # self.dtype = embedding.dtype
-        self.weight = Parameter(embedding.weight.data.clone())
+        self.full_weight = Parameter(embedding.weight.data.clone())
+        x_transform = self.full_weight.data.detach()
+        w_min = x_transform.min(dim=1).values
+        w_max = x_transform.max(dim=1).values
+        self.weight = self.weight_function(self.full_weight, self.weight_bit, w_min, w_max)
         self.padding_idx = embedding.padding_idx
         self.max_norm = embedding.max_norm
         self.norm_type = embedding.norm_type
@@ -262,13 +267,13 @@ class Quant_Embedding(Module):
         using quantized weights to forward x
         """
         w = self.weight
-        x_transform = w.data.detach()
-        w_min = x_transform.min(dim=1).values
-        w_max = x_transform.max(dim=1).values
-        if not self.full_precision_flag:
-            w = self.weight_function(self.weight, self.weight_bit, w_min, w_max)
-        else:
-            w = self.weight
+        # x_transform = w.data.detach()
+        # w_min = x_transform.min(dim=1).values
+        # w_max = x_transform.max(dim=1).values
+        # if not self.full_precision_flag:
+        #     w = self.weight_function(self.weight, self.weight_bit, w_min, w_max)
+        # else:
+        #     w = self.weight
         return F.embedding(
             x,
             w,

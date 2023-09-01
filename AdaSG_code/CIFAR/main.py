@@ -150,7 +150,7 @@ class ExperimentDesign:
         self.unfreeze_Flag = True
 
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-        # os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
+        os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
 
         self.settings.set_save_path()
         self.logger = self.set_logger()
@@ -232,7 +232,7 @@ class ExperimentDesign:
 
         elif self.settings.dataset in ["gowalla"]:
             if self.settings.network in ["lightgcn"]:
-                self.test_input = Variable(torch.randn(1, 3).cuda())
+                # self.test_input = Variable(torch.randn(1, 3).cuda())
                 self.model = gnn_get_model(
                     self.settings.network,
                     pretrained=True,
@@ -430,11 +430,11 @@ class ExperimentDesign:
                 if best_precision < results['precision'][0]:
                     best_precision = results['precision'][0]
 
-                self.logger.info(
-                    "#==>Best Result is: Topk10 Accuracy: {:f}".format(
-                        results['precision'][0]
-                    )
-                )
+                # self.logger.info(
+                #     "#==>Best Result is: Topk20 Accuracy: {:f}".format(
+                #         results['precision'][0]
+                #     )
+                # )
 
         except BaseException as e:
             self.logger.error(

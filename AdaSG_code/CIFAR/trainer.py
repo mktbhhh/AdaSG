@@ -91,6 +91,7 @@ class GnnTrainer(object):
         self.bpr = loss_class
         self.lr_master_S = lr_master_S
         self.lr_master_G = lr_master_G
+        self.MSE_loss = nn.MSELoss().cuda()
 
         self.optimizer_S = optim.Adam(model.parameters(), lr=self.lr_master_S.lr)
         self.log_soft = nn.LogSoftmax(dim=1)
@@ -154,6 +155,14 @@ class GnnTrainer(object):
         self.optimizer_G.zero_grad()
         loss_G.backward()
         self.optimizer_G.step()
+
+    def backward_S(self, loss_S):
+        """
+        backward propagation
+        """
+        self.optimizer_S.zero_grad()
+        loss_S.backward()
+        self.optimizer_S.step()
 
     def backward(self, loss):
         """
@@ -224,10 +233,10 @@ class GnnTrainer(object):
             self.mean_list.clear()
             self.var_list.clear()
 
-            output_teacher_batch = self.model_teacher.getUserItemScore(
+            output_teacher_batch = self.model_teacher(
                 gen_user, gen_item
             )
-            output = self.model.getUserItemScore(gen_user, gen_item)
+            output = self.model(gen_user, gen_item)
 
             # generation loss
             z_ds = output_teacher_batch - output
@@ -495,6 +504,7 @@ class GnnTrainer(object):
                               {str(world.topks[i]): results['ndcg'][i] for i in range(len(world.topks))}, epoch)
             if multicore == 1:
                 pool.close()
+            print("test_teacher==>")
             print(results)
 
         # print(

@@ -4,7 +4,7 @@ dataPath = "dataset_path"
 dataset = "gowalla" # options: imagenet | cifar100/10
 nGPU = 1  # number of GPUs to use by default
 GPU = 0  # default gpu to use, options: range(nGPU)
-visible_devices = "2"
+visible_devices = "1"
 network = "lightgcn"
 # ------------- Data options -------------------------------------------
 nThreads = 8  # number of data loader threads
