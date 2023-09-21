@@ -34,7 +34,7 @@ def marginal_loss(teacher_out, student_out, num_class):
     lambda_low = 0.3
     h_info = compute_entropy(teacher_out - student_out, 1)
     h_info_prime = (h_info - h_info.min()) / (max_entropy - h_info.min())
-    zero_vector = torch.zeros(16).cuda()  # batch size 16
+    zero_vector = torch.zeros(4096).cuda()  # batch size 16
     h_loss = torch.mean(torch.max(lambda_low - h_info_prime, zero_vector)) + torch.mean(
         torch.max(h_info_prime - lambda_upper, zero_vector)
     )
@@ -135,15 +135,26 @@ class GnnTrainer(object):
         q_loss = -torch.mean(q_loss)
 
         return q_loss
+    
+    def loss_bpr(self, gen_user, gen_item, teacher_outputs, linear=None):
+        # all_users, all_items = self.model.computer()
+        users_emb_ego = self.model.embedding_user(gen_user)
+        pos_emb_ego = self.model.embedding_item(gen_item)
+        output = torch.mul(users_emb_ego, pos_emb_ego)
+        q_loss = 200 * 20 * compute_entropy(teacher_outputs - output, 10)
+        q_loss = -torch.mean(q_loss)
+
+        return q_loss
+
 
     def forward(self, gen_user, gen_item, teacher_outputs, labels=None, linear=None):
         """
         forward propagation
         """
         # forward and backward and optimize
-        output = self.model.getUserItemScore(gen_user, gen_item)
+        output = self.model(gen_user, gen_item)
         if labels is not None:
-            loss = self.loss_fn_kd(output, labels, teacher_outputs, linear)
+            loss = self.loss_bpr(gen_user, gen_item, teacher_outputs, linear)
             return output, loss
         else:
             return output, None
@@ -429,6 +440,8 @@ class GnnTrainer(object):
         """
         testing
         """
+        self.get_model_size()
+
         CORES = multiprocessing.cpu_count() // 2
         u_batch_size = world.test_u_batch_size
         testDict: dict = dataset.testDict
@@ -518,6 +531,26 @@ class GnnTrainer(object):
         self.run_count += 1
 
         return results
+
+    def get_model_size(self):
+        def getModelSize(model):
+            param_size = 0
+            param_sum = 0
+            for param in model.parameters():
+                param_size += param.nelement() * param.element_size()
+                param_sum += param.nelement()
+            buffer_size = 0
+            buffer_sum = 0
+            for buffer in model.buffers():
+                buffer_size += buffer.nelement() * buffer.element_size()
+                buffer_sum += buffer.nelement()
+            all_size = (param_size + buffer_size) / 1024 / 1024
+            print('模型总大小为：{:.3f}MB'.format(all_size))
+            return (param_size, param_sum, buffer_size, buffer_sum, all_size)
+        
+        print(f'model_teacher size:{getModelSize(self.model_teacher)}')
+        print(f'model size:{getModelSize(self.model)}')
+
 
 
 

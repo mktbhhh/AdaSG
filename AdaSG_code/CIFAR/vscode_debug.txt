@@ -8,14 +8,14 @@
             "name": "Python: main.py",
             "type": "python",
             "request": "launch",
-            "program": "/data1/home/yiny/Documents/PycharmProjects/AdaSG/AdaSG_code/CIFAR/main.py",
+            "program": "${workspaceFolder}/AdaSG_code/CIFAR/main.py",
             "console": "integratedTerminal",
             // "justMyCode": true
             "env": {
-                "CUDA_VISIBLE_DEVICES": "2"
+                "CUDA_VISIBLE_DEVICES": "1"
             },
-            "cwd": "/data1/home/yiny/Documents/PycharmProjects/AdaSG/AdaSG_code/CIFAR",
-            "args": ["--conf_path=./gowalla_lightgcn.hocon", "--id=02"]
+            "cwd": "${workspaceFolder}/AdaSG_code/CIFAR",
+            "args": ["--conf_path=./gowalla_lightgcn.hocon", "--id=1"]
         }
     ]
 }

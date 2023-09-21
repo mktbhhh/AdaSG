@@ -1,0 +1,25 @@
+nohup: ignoring input
+[0;30;43mloading [./dataset_path/gowalla][0m
+810128 interactions for training
+217242 interactions for testing
+gowalla Sparsity : 0.0008396216228570436
+gowalla is ready to go
+|===>The used PyTorch version is 2.0.0.post200
+[0;30;43mloading [./dataset_path/gowalla][0m
+810128 interactions for training
+217242 interactions for testing
+gowalla Sparsity : 0.0008396216228570436
+gowalla is ready to go
+[0;30;43muse NORMAL distribution initilizer[0m
+loading adjacency matrix
+successfully loaded...
+don't split the matrix
+lgn is already to go(dropout:0)
+[0;30;43muse NORMAL distribution initilizer[0m
+loading adjacency matrix
+lgn is already to go(dropout:0)
+LightGCN(
+  (embedding_user): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (embedding_item): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (f): Sigmoid()
+)

@@ -1,7 +1,7 @@
 import torch
 
 device = torch.device('cuda')
-dataset = "gowalla"
+dataset = "gowalla_small"
 model_name = "lgn"
 test_u_batch_size = 100
 topks = [20]

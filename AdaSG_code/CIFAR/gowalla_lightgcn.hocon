@@ -11,7 +11,7 @@ nThreads = 8  # number of data loader threads
 
 # ---------- Optimization options for S --------------------------------------
 nEpochs = 400  # number of total epochs to train 400
-batchSize = 16  # batchsize
+batchSize = 4096  # batchsize
 momentum = 0.9  # momentum 0.9
 weightDecay = 1e-4  # weight decay 1e-4
 opt_type = "SGD"

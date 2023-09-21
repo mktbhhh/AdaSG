@@ -1,0 +1,6 @@
+2023-09-06 06:04:25,250 INFO: |===>The used PyTorch version is 2.0.0.post200
+2023-09-06 06:04:29,193 INFO: LightGCN(
+  (embedding_user): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (embedding_item): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (f): Sigmoid()
+)

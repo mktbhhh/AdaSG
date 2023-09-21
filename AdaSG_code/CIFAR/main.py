@@ -14,6 +14,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 
 import world
+
 # option file should be modified according to your expriment
 from options import Option
 
@@ -26,7 +27,7 @@ from pytorchcv.model_provider import get_model as ptcv_get_model
 from pytorchgnn.model_provider_gnn import get_model as gnn_get_model
 from conditional_batchnorm import CategoricalConditionalBatchNorm2d
 
-from utils.gnn_utils import BPRLoss
+from utils.gnn_utils import BPRLoss, set_seed
 
 
 class Generator(nn.Module):
@@ -134,7 +135,7 @@ class Generator_gowalla(nn.Module):
 
 
 class ExperimentDesign:
-    def __init__(self, generator=None, options=None, conf_path=None):
+    def __init__(self, generator=None, options=None, conf_path=None, dataset=None):
         self.settings = options or Option(conf_path)
         self.generator = generator
         self.train_loader = None
@@ -150,11 +151,13 @@ class ExperimentDesign:
         self.unfreeze_Flag = True
 
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-        os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
+        # os.environ["CUDA_VISIBLE_DEVICES"] = self.settings.visible_devices
 
         self.settings.set_save_path()
         self.logger = self.set_logger()
         self.settings.paramscheck(self.logger)
+
+        self.dataset = dataset
 
         self.prepare()
 
@@ -207,7 +210,7 @@ class ExperimentDesign:
         self.train_loader, self.test_loader = data_loader.getloader()
 
     def _set_gnn_dataloader(self):
-        data_loader = Loader(self.settings)
+        data_loader = self.dataset
 
         self.gnn_loader = data_loader
 
@@ -230,7 +233,7 @@ class ExperimentDesign:
                 )
                 self.model_teacher.eval()
 
-        elif self.settings.dataset in ["gowalla"]:
+        elif self.settings.dataset in ["gowalla", "gowalla_small"]:
             if self.settings.network in ["lightgcn"]:
                 # self.test_input = Variable(torch.randn(1, 3).cuda())
                 self.model = gnn_get_model(
@@ -309,6 +312,7 @@ class ExperimentDesign:
 
         weight_bit = self.settings.qw
         act_bit = self.settings.qa
+        model.full_precision_flag = False
 
         # quantize convolutional and linear layers
         if type(model) == nn.Conv2d:
@@ -422,13 +426,13 @@ class ExperimentDesign:
                     else:
                         test_error = 100
                         test5_error = 100
-                elif self.settings.dataset in ["gowalla"]:
+                elif self.settings.dataset in ["gowalla", "gowalla_small"]:
                     results = self.trainer.test(self.gnn_loader, epoch, w)
                 else:
                     assert False, "invalid data set"
 
-                if best_precision < results['precision'][0]:
-                    best_precision = results['precision'][0]
+                if best_precision < results["precision"][0]:
+                    best_precision = results["precision"][0]
 
                 # self.logger.info(
                 #     "#==>Best Result is: Topk20 Accuracy: {:f}".format(
@@ -453,6 +457,7 @@ class ExperimentDesign:
 
 
 def main():
+    set_seed(2023)
     parser = argparse.ArgumentParser(description="Baseline")
     parser.add_argument(
         "--conf_path",
@@ -471,15 +476,16 @@ def main():
         generator = Generator(option)
     elif option.dataset in ["imagenet"]:
         generator = Generator_imagenet(option)
-    elif option.dataset in ["gowalla"]:
-        data_loader = Loader(option)
+    elif option.dataset in ["gowalla", "gowalla_small"]:
+        data_loader = Loader(option, path="./dataset_path/"+option.dataset)
         generator = Generator_gowalla(option, data_loader.n_users, data_loader.m_items)
     else:
         assert False, "invalid data set"
 
-    experiment = ExperimentDesign(generator, option)
+    experiment = ExperimentDesign(generator, option, dataset=data_loader)
     experiment.run()
 
 
 if __name__ == "__main__":
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
     main()

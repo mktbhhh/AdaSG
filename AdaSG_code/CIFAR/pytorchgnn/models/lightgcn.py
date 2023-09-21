@@ -41,6 +41,7 @@ class LightGCN(BasicModel):
         self.n_layers = self.config.lightGCN_n_layers
         self.keep_prob = self.config.keep_prob
         self.A_split = self.config.A_split
+        self.full_precision_flag = True
         self.embedding_user = torch.nn.Embedding(
             num_embeddings=self.num_users, embedding_dim=self.latent_dim
         )
@@ -93,8 +94,12 @@ class LightGCN(BasicModel):
         """
         propagate methods for lightGCN
         """
-        users_emb = self.embedding_user.weight
-        items_emb = self.embedding_item.weight
+        if not self.full_precision_flag:
+            users_emb = self.embedding_user.get_quantization_weight()
+            items_emb = self.embedding_item.get_quantization_weight()
+        else:
+            users_emb = self.embedding_user.weight
+            items_emb = self.embedding_item.weight
         all_emb = torch.cat([users_emb, items_emb])
         #   torch.split(all_emb , [self.num_users, self.num_items])
         embs = [all_emb]
@@ -121,6 +126,9 @@ class LightGCN(BasicModel):
         # print(embs.size())
         light_out = torch.mean(embs, dim=1)
         users, items = torch.split(light_out, [self.num_users, self.num_items])
+        if not self.full_precision_flag:
+            users = self.embedding_user.quantization_last_emb(users)
+            items = self.embedding_item.quantization_last_emb(items)
         return users, items
 
     def getUsersRating(self, users):
@@ -130,11 +138,11 @@ class LightGCN(BasicModel):
         rating = self.f(torch.matmul(users_emb, items_emb.t()))
         return rating
 
-    def getUserItemScore(self, userid, itemid):
-        all_users, all_items = self.computer()
-        users_emb = all_users[userid.long()]
-        items_emb = all_items[itemid.long()]
-        return self.f(torch.mul(users_emb, items_emb))
+    # def getUserItemScore(self, userid, itemid):
+    #     all_users, all_items = self.computer()
+    #     users_emb = all_users[userid.long()]
+    #     items_emb = all_items[itemid.long()]
+    #     return self.f(torch.mul(users_emb, items_emb))
 
     def getEmbedding(self, users, pos_items, neg_items):
         all_users, all_items = self.computer()
@@ -172,12 +180,12 @@ class LightGCN(BasicModel):
         # compute embedding
         users_emb0 = self.embedding_user(users)
         items_emb0 = self.embedding_item(items)
-        all_users, all_items = self.computer()
-        # print('forward')
         # all_users, all_items = self.computer()
+        # print('forward')
+        all_users, all_items = self.computer()
         users_emb = all_users[users]
         items_emb = all_items[items]
-        inner_pro = torch.mul(users_emb0, items_emb0)
+        inner_pro = torch.mul(users_emb, items_emb)
         # gamma = torch.sum(inner_pro, dim=1)
         return inner_pro
 

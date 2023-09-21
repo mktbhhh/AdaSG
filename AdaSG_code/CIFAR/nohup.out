@@ -1,0 +1,835 @@
+[0;30;43mloading [./dataset_path/gowalla][0m
+810128 interactions for training
+217242 interactions for testing
+gowalla Sparsity : 0.0008396216228570436
+gowalla is ready to go
+|===>The used PyTorch version is 2.0.0.post200
+[0;30;43muse NORMAL distribution initilizer[0m
+loading adjacency matrix
+successfully loaded...
+don't split the matrix
+lgn is already to go(dropout:0)
+[0;30;43muse NORMAL distribution initilizer[0m
+loading adjacency matrix
+lgn is already to go(dropout:0)
+LightGCN(
+  (embedding_user): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (embedding_item): (Quant_Embedding() weight_bit3, full_precision_flag=False
+  (f): Sigmoid()
+)
+test_teacher==>
+{'precision': array([0.05584098]), 'recall': array([0.18188282]), 'ndcg': array([0.15444556])}
+
+ self.unfreeze_model(self.model)
+
+[Epoch 1/400] [Batch 200/200] [acc: 1.5592%] [G loss: nan] [Balance loss: 0.837294] [BNS_loss:nan] [S loss: -16628.117188] 
+{'precision': array([0.05549936]), 'recall': array([0.18108102]), 'ndcg': array([0.15378233])}
+
+ self.unfreeze_model(self.model)
+
+[Epoch 2/400] [Batch 200/200] [acc: 1.5577%] [G loss: nan] [Balance loss: 0.838274] [BNS_loss:nan] [S loss: -16628.171875] 
+{'precision': array([0.05549936]), 'recall': array([0.18108102]), 'ndcg': array([0.15378233])}
+
+ self.unfreeze_model(self.model)
+
+[Epoch 3/400] [Batch 200/200] [acc: 1.5554%] [G loss: nan] [Balance loss: 0.838249] [BNS_loss:nan] [S loss: -16628.300781] 
+{'precision': array([0.05549936]), 'recall': array([0.18108102]), 'ndcg': array([0.15378233])}
+
+ self.unfreeze_model(self.model)
+
+[Epoch 4/400] [Batch 200/200] [acc: 1.5370%] [G loss: nan] [Balance loss: 0.837604] [BNS_loss:nan] [S loss: -16628.253906] 
+{'precision': array([0.05549936]), 'recall': array([0.18108102]), 'ndcg': array([0.15378233])}
+[Epoch 5/400] [Batch 200/200] [acc: 1.5707%] [G loss: nan] [Balance loss: 0.838912] [BNS_loss:nan] [S loss: -16628.464844] 
+{'precision': array([0.05552281]), 'recall': array([0.18095707]), 'ndcg': array([0.15380196])}
+[Epoch 6/400] [Batch 200/200] [acc: 1.5485%] [G loss: nan] [Balance loss: 0.838462] [BNS_loss:nan] [S loss: -16628.453125] 
+{'precision': array([0.05549601]), 'recall': array([0.18085571]), 'ndcg': array([0.15375626])}
+[Epoch 7/400] [Batch 200/200] [acc: 1.5356%] [G loss: nan] [Balance loss: 0.837934] [BNS_loss:nan] [S loss: -16628.816406] 
+{'precision': array([0.05559649]), 'recall': array([0.18113598]), 'ndcg': array([0.15385606])}
+[Epoch 8/400] [Batch 200/200] [acc: 1.5721%] [G loss: nan] [Balance loss: 0.837751] [BNS_loss:nan] [S loss: -16628.830078] 
+{'precision': array([0.05554123]), 'recall': array([0.18086591]), 'ndcg': array([0.15372787])}
+[Epoch 9/400] [Batch 200/200] [acc: 1.5620%] [G loss: nan] [Balance loss: 0.837342] [BNS_loss:nan] [S loss: -16629.095703] 
+{'precision': array([0.05555797]), 'recall': array([0.18078765]), 'ndcg': array([0.15373803])}
+[Epoch 10/400] [Batch 200/200] [acc: 1.5679%] [G loss: nan] [Balance loss: 0.838248] [BNS_loss:nan] [S loss: -16629.138672] 
+{'precision': array([0.05560486]), 'recall': array([0.18106835]), 'ndcg': array([0.15387031])}
+[Epoch 11/400] [Batch 200/200] [acc: 1.5559%] [G loss: nan] [Balance loss: 0.838462] [BNS_loss:nan] [S loss: -16629.306641] 
+{'precision': array([0.05566682]), 'recall': array([0.18141764]), 'ndcg': array([0.1539502])}
+[Epoch 12/400] [Batch 200/200] [acc: 1.5649%] [G loss: nan] [Balance loss: 0.837385] [BNS_loss:nan] [S loss: -16629.542969] 
+{'precision': array([0.05556467]), 'recall': array([0.18108077]), 'ndcg': array([0.15373352])}
+[Epoch 13/400] [Batch 200/200] [acc: 1.5728%] [G loss: nan] [Balance loss: 0.837550] [BNS_loss:nan] [S loss: -16629.517578] 
+{'precision': array([0.05559147]), 'recall': array([0.1810978]), 'ndcg': array([0.1538419])}
+[Epoch 14/400] [Batch 200/200] [acc: 1.5342%] [G loss: nan] [Balance loss: 0.836781] [BNS_loss:nan] [S loss: -16629.642578] 
+{'precision': array([0.05552783]), 'recall': array([0.18074786]), 'ndcg': array([0.15370614])}
+[Epoch 15/400] [Batch 200/200] [acc: 1.5758%] [G loss: nan] [Balance loss: 0.838356] [BNS_loss:nan] [S loss: -16629.847656] 
+{'precision': array([0.05558812]), 'recall': array([0.18099948]), 'ndcg': array([0.15371648])}
+[Epoch 16/400] [Batch 200/200] [acc: 1.5734%] [G loss: nan] [Balance loss: 0.837592] [BNS_loss:nan] [S loss: -16629.886719] 
+{'precision': array([0.05558142]), 'recall': array([0.1810488]), 'ndcg': array([0.15387895])}
+[Epoch 17/400] [Batch 200/200] [acc: 1.5369%] [G loss: nan] [Balance loss: 0.837827] [BNS_loss:nan] [S loss: -16630.074219] 
+{'precision': array([0.05547257]), 'recall': array([0.18061314]), 'ndcg': array([0.15357976])}
+[Epoch 18/400] [Batch 200/200] [acc: 1.5388%] [G loss: nan] [Balance loss: 0.837302] [BNS_loss:nan] [S loss: -16630.207031] 
+{'precision': array([0.05546922]), 'recall': array([0.18040457]), 'ndcg': array([0.15348345])}
+[Epoch 19/400] [Batch 200/200] [acc: 1.5403%] [G loss: nan] [Balance loss: 0.837421] [BNS_loss:nan] [S loss: -16630.230469] 
+{'precision': array([0.05547257]), 'recall': array([0.18050628]), 'ndcg': array([0.15354239])}
+[Epoch 20/400] [Batch 200/200] [acc: 1.5646%] [G loss: nan] [Balance loss: 0.837780] [BNS_loss:nan] [S loss: -16630.363281] 
+{'precision': array([0.05553955]), 'recall': array([0.18060615]), 'ndcg': array([0.15350403])}
+[Epoch 21/400] [Batch 200/200] [acc: 1.5499%] [G loss: nan] [Balance loss: 0.837625] [BNS_loss:nan] [S loss: -16630.527344] 
+{'precision': array([0.05557974]), 'recall': array([0.18076635]), 'ndcg': array([0.15348269])}
+[Epoch 22/400] [Batch 200/200] [acc: 1.5536%] [G loss: nan] [Balance loss: 0.836972] [BNS_loss:nan] [S loss: -16630.664062] 
+{'precision': array([0.05551109]), 'recall': array([0.18038972]), 'ndcg': array([0.15348338])}
+[Epoch 23/400] [Batch 200/200] [acc: 1.5519%] [G loss: nan] [Balance loss: 0.838582] [BNS_loss:nan] [S loss: -16630.759766] 
+{'precision': array([0.05543238]), 'recall': array([0.18032789]), 'ndcg': array([0.15337442])}
+[Epoch 24/400] [Batch 200/200] [acc: 1.5681%] [G loss: nan] [Balance loss: 0.837005] [BNS_loss:nan] [S loss: -16630.867188] 
+{'precision': array([0.05548597]), 'recall': array([0.18044654]), 'ndcg': array([0.15343995])}
+[Epoch 25/400] [Batch 200/200] [acc: 1.5648%] [G loss: nan] [Balance loss: 0.837431] [BNS_loss:nan] [S loss: -16631.041016] 
+{'precision': array([0.05557472]), 'recall': array([0.18077788]), 'ndcg': array([0.15345069])}
+[Epoch 26/400] [Batch 200/200] [acc: 1.5520%] [G loss: nan] [Balance loss: 0.838061] [BNS_loss:nan] [S loss: -16631.039062] 
+{'precision': array([0.05551611]), 'recall': array([0.18052438]), 'ndcg': array([0.1534063])}
+[Epoch 27/400] [Batch 200/200] [acc: 1.5298%] [G loss: nan] [Balance loss: 0.837820] [BNS_loss:nan] [S loss: -16631.193359] 
+{'precision': array([0.0554441]), 'recall': array([0.18048007]), 'ndcg': array([0.15334603])}
+[Epoch 28/400] [Batch 200/200] [acc: 1.5566%] [G loss: nan] [Balance loss: 0.836489] [BNS_loss:nan] [S loss: -16631.343750] 
+{'precision': array([0.05541898]), 'recall': array([0.18024318]), 'ndcg': array([0.15316048])}
+[Epoch 29/400] [Batch 200/200] [acc: 1.5503%] [G loss: nan] [Balance loss: 0.837259] [BNS_loss:nan] [S loss: -16631.291016] 
+{'precision': array([0.05537879]), 'recall': array([0.18004096]), 'ndcg': array([0.15305155])}
+[Epoch 30/400] [Batch 200/200] [acc: 1.5597%] [G loss: nan] [Balance loss: 0.838012] [BNS_loss:nan] [S loss: -16631.402344] 
+{'precision': array([0.05533693]), 'recall': array([0.18003786]), 'ndcg': array([0.15299842])}
+[Epoch 31/400] [Batch 200/200] [acc: 1.5577%] [G loss: nan] [Balance loss: 0.836364] [BNS_loss:nan] [S loss: -16631.474609] 
+{'precision': array([0.05541061]), 'recall': array([0.180219]), 'ndcg': array([0.15310086])}
+[Epoch 32/400] [Batch 200/200] [acc: 1.5623%] [G loss: nan] [Balance loss: 0.837064] [BNS_loss:nan] [S loss: -16631.617188] 
+{'precision': array([0.05543071]), 'recall': array([0.18033642]), 'ndcg': array([0.15315695])}
+[Epoch 33/400] [Batch 200/200] [acc: 1.5519%] [G loss: nan] [Balance loss: 0.837318] [BNS_loss:nan] [S loss: -16631.640625] 
+{'precision': array([0.05537042]), 'recall': array([0.17997758]), 'ndcg': array([0.15290893])}
+[Epoch 34/400] [Batch 200/200] [acc: 1.5781%] [G loss: nan] [Balance loss: 0.836423] [BNS_loss:nan] [S loss: -16631.812500] 
+{'precision': array([0.05533358]), 'recall': array([0.17981325]), 'ndcg': array([0.15287538])}
+[Epoch 35/400] [Batch 200/200] [acc: 1.5730%] [G loss: nan] [Balance loss: 0.836721] [BNS_loss:nan] [S loss: -16631.804688] 
+{'precision': array([0.05543071]), 'recall': array([0.18003765]), 'ndcg': array([0.15288993])}
+[Epoch 36/400] [Batch 200/200] [acc: 1.5342%] [G loss: nan] [Balance loss: 0.836889] [BNS_loss:nan] [S loss: -16631.755859] 
+{'precision': array([0.05531013]), 'recall': array([0.179723]), 'ndcg': array([0.1528312])}
+[Epoch 37/400] [Batch 200/200] [acc: 1.5638%] [G loss: nan] [Balance loss: 0.836465] [BNS_loss:nan] [S loss: -16631.966797] 
+{'precision': array([0.05535032]), 'recall': array([0.17992643]), 'ndcg': array([0.15292443])}
+[Epoch 38/400] [Batch 200/200] [acc: 1.5546%] [G loss: nan] [Balance loss: 0.837278] [BNS_loss:nan] [S loss: -16632.048828] 
+{'precision': array([0.05531516]), 'recall': array([0.17988897]), 'ndcg': array([0.15281895])}
+[Epoch 39/400] [Batch 200/200] [acc: 1.5430%] [G loss: nan] [Balance loss: 0.837882] [BNS_loss:nan] [S loss: -16631.998047] 
+{'precision': array([0.05531516]), 'recall': array([0.17980027]), 'ndcg': array([0.15272817])}
+[Epoch 40/400] [Batch 200/200] [acc: 1.5885%] [G loss: nan] [Balance loss: 0.836466] [BNS_loss:nan] [S loss: -16632.111328] 
+{'precision': array([0.05525152]), 'recall': array([0.17937232]), 'ndcg': array([0.152685])}
+[Epoch 41/400] [Batch 200/200] [acc: 1.5403%] [G loss: nan] [Balance loss: 0.836573] [BNS_loss:nan] [S loss: -16632.216797] 
+{'precision': array([0.05521468]), 'recall': array([0.17941388]), 'ndcg': array([0.15261835])}
+[Epoch 42/400] [Batch 200/200] [acc: 1.5803%] [G loss: nan] [Balance loss: 0.836661] [BNS_loss:nan] [S loss: -16632.314453] 
+{'precision': array([0.05522808]), 'recall': array([0.17933629]), 'ndcg': array([0.152604])}
+[Epoch 43/400] [Batch 200/200] [acc: 1.5260%] [G loss: nan] [Balance loss: 0.837056] [BNS_loss:nan] [S loss: -16632.382812] 
+{'precision': array([0.05527664]), 'recall': array([0.1795254]), 'ndcg': array([0.15258186])}
+[Epoch 44/400] [Batch 200/200] [acc: 1.5568%] [G loss: nan] [Balance loss: 0.837112] [BNS_loss:nan] [S loss: -16632.431641] 
+{'precision': array([0.05511923]), 'recall': array([0.17906729]), 'ndcg': array([0.15236606])}
+[Epoch 45/400] [Batch 200/200] [acc: 1.5436%] [G loss: nan] [Balance loss: 0.836207] [BNS_loss:nan] [S loss: -16632.531250] 
+{'precision': array([0.05511923]), 'recall': array([0.17904248]), 'ndcg': array([0.15239078])}
+[Epoch 46/400] [Batch 200/200] [acc: 1.5428%] [G loss: nan] [Balance loss: 0.836742] [BNS_loss:nan] [S loss: -16632.558594] 
+{'precision': array([0.05511253]), 'recall': array([0.17896865]), 'ndcg': array([0.15229785])}
+[Epoch 47/400] [Batch 200/200] [acc: 1.5673%] [G loss: nan] [Balance loss: 0.836282] [BNS_loss:nan] [S loss: -16632.480469] 
+{'precision': array([0.05506732]), 'recall': array([0.17900328]), 'ndcg': array([0.15225057])}
+[Epoch 48/400] [Batch 200/200] [acc: 1.5579%] [G loss: nan] [Balance loss: 0.836778] [BNS_loss:nan] [S loss: -16632.582031] 
+{'precision': array([0.05504387]), 'recall': array([0.17877833]), 'ndcg': array([0.1520907])}
+[Epoch 49/400] [Batch 200/200] [acc: 1.5408%] [G loss: nan] [Balance loss: 0.837245] [BNS_loss:nan] [S loss: -16632.707031] 
+{'precision': array([0.05509579]), 'recall': array([0.17906318]), 'ndcg': array([0.15232155])}
+[Epoch 50/400] [Batch 200/200] [acc: 1.5499%] [G loss: nan] [Balance loss: 0.836261] [BNS_loss:nan] [S loss: -16632.722656] 
+{'precision': array([0.0550489]), 'recall': array([0.17881531]), 'ndcg': array([0.15203353])}
+[Epoch 51/400] [Batch 200/200] [acc: 1.5682%] [G loss: nan] [Balance loss: 0.836459] [BNS_loss:nan] [S loss: -16632.785156] 
+{'precision': array([0.05503718]), 'recall': array([0.17890127]), 'ndcg': array([0.15202953])}
+[Epoch 52/400] [Batch 200/200] [acc: 1.5818%] [G loss: nan] [Balance loss: 0.837084] [BNS_loss:nan] [S loss: -16632.843750] 
+{'precision': array([0.05499364]), 'recall': array([0.17850274]), 'ndcg': array([0.1520777])}
+[Epoch 53/400] [Batch 200/200] [acc: 1.5784%] [G loss: nan] [Balance loss: 0.836464] [BNS_loss:nan] [S loss: -16632.871094] 
+{'precision': array([0.0548513]), 'recall': array([0.17823338]), 'ndcg': array([0.15175351])}
+[Epoch 54/400] [Batch 200/200] [acc: 1.5444%] [G loss: nan] [Balance loss: 0.836900] [BNS_loss:nan] [S loss: -16632.972656] 
+{'precision': array([0.0548446]), 'recall': array([0.17818875]), 'ndcg': array([0.15182381])}
+[Epoch 55/400] [Batch 200/200] [acc: 1.5562%] [G loss: nan] [Balance loss: 0.835744] [BNS_loss:nan] [S loss: -16632.941406] 
+{'precision': array([0.0548379]), 'recall': array([0.17836385]), 'ndcg': array([0.15168647])}
+[Epoch 56/400] [Batch 200/200] [acc: 1.5603%] [G loss: nan] [Balance loss: 0.836567] [BNS_loss:nan] [S loss: -16633.058594] 
+{'precision': array([0.05486302]), 'recall': array([0.17808238]), 'ndcg': array([0.15167717])}
+[Epoch 57/400] [Batch 200/200] [acc: 1.5641%] [G loss: nan] [Balance loss: 0.836031] [BNS_loss:nan] [S loss: -16633.091797] 
+{'precision': array([0.05472738]), 'recall': array([0.17794187]), 'ndcg': array([0.15148747])}
+[Epoch 58/400] [Batch 200/200] [acc: 1.5394%] [G loss: nan] [Balance loss: 0.837066] [BNS_loss:nan] [S loss: -16633.136719] 
+{'precision': array([0.05490153]), 'recall': array([0.17822783]), 'ndcg': array([0.15169709])}
+[Epoch 59/400] [Batch 200/200] [acc: 1.5515%] [G loss: nan] [Balance loss: 0.836172] [BNS_loss:nan] [S loss: -16633.212891] 
+{'precision': array([0.05474915]), 'recall': array([0.17775443]), 'ndcg': array([0.15135358])}
+[Epoch 60/400] [Batch 200/200] [acc: 1.5724%] [G loss: nan] [Balance loss: 0.835457] [BNS_loss:nan] [S loss: -16633.232422] 
+{'precision': array([0.05467881]), 'recall': array([0.17762241]), 'ndcg': array([0.15140778])}
+[Epoch 61/400] [Batch 200/200] [acc: 1.5499%] [G loss: nan] [Balance loss: 0.836399] [BNS_loss:nan] [S loss: -16633.248047] 
+{'precision': array([0.05473575]), 'recall': array([0.17773264]), 'ndcg': array([0.15138056])}
+[Epoch 62/400] [Batch 200/200] [acc: 1.5815%] [G loss: nan] [Balance loss: 0.835530] [BNS_loss:nan] [S loss: -16633.326172] 
+{'precision': array([0.05468551]), 'recall': array([0.17772059]), 'ndcg': array([0.15132638])}
+[Epoch 63/400] [Batch 200/200] [acc: 1.5618%] [G loss: nan] [Balance loss: 0.836345] [BNS_loss:nan] [S loss: -16633.363281] 
+{'precision': array([0.05465034]), 'recall': array([0.17736722]), 'ndcg': array([0.15120175])}
+[Epoch 64/400] [Batch 200/200] [acc: 1.5505%] [G loss: nan] [Balance loss: 0.836299] [BNS_loss:nan] [S loss: -16633.386719] 
+{'precision': array([0.0547324]), 'recall': array([0.17767552]), 'ndcg': array([0.15133115])}
+[Epoch 65/400] [Batch 200/200] [acc: 1.5502%] [G loss: nan] [Balance loss: 0.836362] [BNS_loss:nan] [S loss: -16633.367188] 
+{'precision': array([0.05461685]), 'recall': array([0.17723329]), 'ndcg': array([0.15100746])}
+[Epoch 66/400] [Batch 200/200] [acc: 1.5482%] [G loss: nan] [Balance loss: 0.836719] [BNS_loss:nan] [S loss: -16633.492188] 
+{'precision': array([0.05470561]), 'recall': array([0.17761286]), 'ndcg': array([0.15122027])}
+[Epoch 67/400] [Batch 200/200] [acc: 1.5637%] [G loss: nan] [Balance loss: 0.836065] [BNS_loss:nan] [S loss: -16633.498047] 
+{'precision': array([0.05460513]), 'recall': array([0.17754269]), 'ndcg': array([0.15108036])}
+[Epoch 68/400] [Batch 200/200] [acc: 1.5701%] [G loss: nan] [Balance loss: 0.835521] [BNS_loss:nan] [S loss: -16633.535156] 
+{'precision': array([0.05462188]), 'recall': array([0.17734704]), 'ndcg': array([0.15102616])}
+[Epoch 69/400] [Batch 200/200] [acc: 1.5680%] [G loss: nan] [Balance loss: 0.837004] [BNS_loss:nan] [S loss: -16633.574219] 
+{'precision': array([0.05456159]), 'recall': array([0.17699066]), 'ndcg': array([0.15082804])}
+[Epoch 70/400] [Batch 200/200] [acc: 1.5555%] [G loss: nan] [Balance loss: 0.835750] [BNS_loss:nan] [S loss: -16633.583984] 
+{'precision': array([0.05458001]), 'recall': array([0.17715347]), 'ndcg': array([0.15087904])}
+[Epoch 71/400] [Batch 200/200] [acc: 1.5598%] [G loss: nan] [Balance loss: 0.836432] [BNS_loss:nan] [S loss: -16633.638672] 
+{'precision': array([0.05449461]), 'recall': array([0.1768778]), 'ndcg': array([0.15073786])}
+[Epoch 72/400] [Batch 200/200] [acc: 1.5685%] [G loss: nan] [Balance loss: 0.837398] [BNS_loss:nan] [S loss: -16633.703125] 
+{'precision': array([0.0545415]), 'recall': array([0.17726421]), 'ndcg': array([0.15078589])}
+[Epoch 73/400] [Batch 200/200] [acc: 1.5691%] [G loss: nan] [Balance loss: 0.835850] [BNS_loss:nan] [S loss: -16633.660156] 
+{'precision': array([0.05444939]), 'recall': array([0.17686185]), 'ndcg': array([0.15045871])}
+[Epoch 74/400] [Batch 200/200] [acc: 1.5674%] [G loss: nan] [Balance loss: 0.836572] [BNS_loss:nan] [S loss: -16633.699219] 
+{'precision': array([0.05448289]), 'recall': array([0.17686278]), 'ndcg': array([0.15053298])}
+[Epoch 75/400] [Batch 200/200] [acc: 1.5515%] [G loss: nan] [Balance loss: 0.836203] [BNS_loss:nan] [S loss: -16633.746094] 
+{'precision': array([0.05444604]), 'recall': array([0.17672384]), 'ndcg': array([0.15060395])}
+[Epoch 76/400] [Batch 200/200] [acc: 1.5817%] [G loss: nan] [Balance loss: 0.836269] [BNS_loss:nan] [S loss: -16633.789062] 
+{'precision': array([0.05440251]), 'recall': array([0.17651934]), 'ndcg': array([0.15048315])}
+[Epoch 77/400] [Batch 200/200] [acc: 1.5537%] [G loss: nan] [Balance loss: 0.836609] [BNS_loss:nan] [S loss: -16633.816406] 
+{'precision': array([0.05448456]), 'recall': array([0.17704359]), 'ndcg': array([0.15054794])}
+[Epoch 78/400] [Batch 200/200] [acc: 1.5642%] [G loss: nan] [Balance loss: 0.835737] [BNS_loss:nan] [S loss: -16633.873047] 
+{'precision': array([0.05442595]), 'recall': array([0.17662304]), 'ndcg': array([0.15038763])}
+[Epoch 79/400] [Batch 200/200] [acc: 1.5649%] [G loss: nan] [Balance loss: 0.837190] [BNS_loss:nan] [S loss: -16633.878906] 
+{'precision': array([0.05435562]), 'recall': array([0.17648073]), 'ndcg': array([0.15037083])}
+[Epoch 80/400] [Batch 200/200] [acc: 1.5833%] [G loss: nan] [Balance loss: 0.837059] [BNS_loss:nan] [S loss: -16633.898438] 
+{'precision': array([0.05425682]), 'recall': array([0.17593196]), 'ndcg': array([0.15003076])}
+[Epoch 81/400] [Batch 200/200] [acc: 1.5734%] [G loss: nan] [Balance loss: 0.836022] [BNS_loss:nan] [S loss: -16633.925781] 
+{'precision': array([0.0542317]), 'recall': array([0.17595364]), 'ndcg': array([0.1502671])}
+[Epoch 82/400] [Batch 200/200] [acc: 1.5626%] [G loss: nan] [Balance loss: 0.836986] [BNS_loss:nan] [S loss: -16633.980469] 
+{'precision': array([0.054225]), 'recall': array([0.17606578]), 'ndcg': array([0.15012267])}
+[Epoch 83/400] [Batch 200/200] [acc: 1.5619%] [G loss: nan] [Balance loss: 0.836137] [BNS_loss:nan] [S loss: -16633.976562] 
+{'precision': array([0.05430538]), 'recall': array([0.17626283]), 'ndcg': array([0.15023131])}
+[Epoch 84/400] [Batch 200/200] [acc: 1.5321%] [G loss: nan] [Balance loss: 0.836286] [BNS_loss:nan] [S loss: -16634.023438] 
+{'precision': array([0.05427356]), 'recall': array([0.17624989]), 'ndcg': array([0.1500423])}
+[Epoch 85/400] [Batch 200/200] [acc: 1.5476%] [G loss: nan] [Balance loss: 0.836351] [BNS_loss:nan] [S loss: -16634.007812] 
+{'precision': array([0.0542384]), 'recall': array([0.17593372]), 'ndcg': array([0.14989634])}
+[Epoch 86/400] [Batch 200/200] [acc: 1.5809%] [G loss: nan] [Balance loss: 0.836069] [BNS_loss:nan] [S loss: -16634.138672] 
+{'precision': array([0.05406759]), 'recall': array([0.17543569]), 'ndcg': array([0.14978631])}
+[Epoch 87/400] [Batch 200/200] [acc: 1.5913%] [G loss: nan] [Balance loss: 0.837078] [BNS_loss:nan] [S loss: -16634.039062] 
+{'precision': array([0.0541329]), 'recall': array([0.17557121]), 'ndcg': array([0.14978032])}
+[Epoch 88/400] [Batch 200/200] [acc: 1.5444%] [G loss: nan] [Balance loss: 0.836785] [BNS_loss:nan] [S loss: -16634.164062] 
+{'precision': array([0.05405921]), 'recall': array([0.17551733]), 'ndcg': array([0.14972421])}
+[Epoch 89/400] [Batch 200/200] [acc: 1.5406%] [G loss: nan] [Balance loss: 0.836971] [BNS_loss:nan] [S loss: -16634.121094] 
+{'precision': array([0.05410443]), 'recall': array([0.17569578]), 'ndcg': array([0.14970372])}
+[Epoch 90/400] [Batch 200/200] [acc: 1.5591%] [G loss: nan] [Balance loss: 0.836371] [BNS_loss:nan] [S loss: -16634.164062] 
+{'precision': array([0.05411448]), 'recall': array([0.17551231]), 'ndcg': array([0.14964384])}
+[Epoch 91/400] [Batch 200/200] [acc: 1.5510%] [G loss: nan] [Balance loss: 0.834802] [BNS_loss:nan] [S loss: -16634.185547] 
+{'precision': array([0.0540207]), 'recall': array([0.17541484]), 'ndcg': array([0.14946366])}
+[Epoch 92/400] [Batch 200/200] [acc: 1.5544%] [G loss: nan] [Balance loss: 0.835834] [BNS_loss:nan] [S loss: -16634.144531] 
+{'precision': array([0.05406424]), 'recall': array([0.17558693]), 'ndcg': array([0.14959666])}
+[Epoch 93/400] [Batch 200/200] [acc: 1.5625%] [G loss: nan] [Balance loss: 0.836444] [BNS_loss:nan] [S loss: -16634.197266] 
+{'precision': array([0.05396544]), 'recall': array([0.1750666]), 'ndcg': array([0.14926575])}
+[Epoch 94/400] [Batch 200/200] [acc: 1.5726%] [G loss: nan] [Balance loss: 0.836102] [BNS_loss:nan] [S loss: -16634.216797] 
+{'precision': array([0.05399558]), 'recall': array([0.17518826]), 'ndcg': array([0.1494434])}
+[Epoch 95/400] [Batch 200/200] [acc: 1.5619%] [G loss: nan] [Balance loss: 0.836998] [BNS_loss:nan] [S loss: -16634.255859] 
+{'precision': array([0.05393194]), 'recall': array([0.17493822]), 'ndcg': array([0.14936027])}
+[Epoch 96/400] [Batch 200/200] [acc: 1.5674%] [G loss: nan] [Balance loss: 0.836764] [BNS_loss:nan] [S loss: -16634.257812] 
+{'precision': array([0.05393362]), 'recall': array([0.1747253]), 'ndcg': array([0.14911901])}
+[Epoch 97/400] [Batch 200/200] [acc: 1.5720%] [G loss: nan] [Balance loss: 0.835401] [BNS_loss:nan] [S loss: -16634.283203] 
+{'precision': array([0.0539219]), 'recall': array([0.17496766]), 'ndcg': array([0.14927888])}
+[Epoch 98/400] [Batch 200/200] [acc: 1.5642%] [G loss: nan] [Balance loss: 0.835337] [BNS_loss:nan] [S loss: -16634.320312] 
+{'precision': array([0.05401233]), 'recall': array([0.17527236]), 'ndcg': array([0.14911346])}
+[Epoch 99/400] [Batch 200/200] [acc: 1.5605%] [G loss: nan] [Balance loss: 0.836282] [BNS_loss:nan] [S loss: -16634.318359] 
+{'precision': array([0.05385491]), 'recall': array([0.17472154]), 'ndcg': array([0.14883662])}
+[Epoch 100/400] [Batch 200/200] [acc: 1.5786%] [G loss: nan] [Balance loss: 0.835598] [BNS_loss:nan] [S loss: -16634.320312] 
+{'precision': array([0.05384487]), 'recall': array([0.17467963]), 'ndcg': array([0.14909408])}
+[Epoch 101/400] [Batch 200/200] [acc: 1.5566%] [G loss: nan] [Balance loss: 0.836745] [BNS_loss:nan] [S loss: -16634.392578] 
+{'precision': array([0.05396544]), 'recall': array([0.1749211]), 'ndcg': array([0.14916647])}
+[Epoch 102/400] [Batch 200/200] [acc: 1.5415%] [G loss: nan] [Balance loss: 0.836279] [BNS_loss:nan] [S loss: -16634.402344] 
+{'precision': array([0.05391687]), 'recall': array([0.17484532]), 'ndcg': array([0.14911612])}
+[Epoch 103/400] [Batch 200/200] [acc: 1.5288%] [G loss: nan] [Balance loss: 0.836035] [BNS_loss:nan] [S loss: -16634.382812] 
+{'precision': array([0.05394534]), 'recall': array([0.17479253]), 'ndcg': array([0.14909568])}
+[Epoch 104/400] [Batch 200/200] [acc: 1.5553%] [G loss: nan] [Balance loss: 0.836053] [BNS_loss:nan] [S loss: -16634.363281] 
+{'precision': array([0.05386998]), 'recall': array([0.17446574]), 'ndcg': array([0.14897645])}
+[Epoch 105/400] [Batch 200/200] [acc: 1.5651%] [G loss: nan] [Balance loss: 0.836256] [BNS_loss:nan] [S loss: -16634.351562] 
+{'precision': array([0.05385826]), 'recall': array([0.17483887]), 'ndcg': array([0.14900358])}
+[Epoch 106/400] [Batch 200/200] [acc: 1.5610%] [G loss: nan] [Balance loss: 0.836734] [BNS_loss:nan] [S loss: -16634.382812] 
+{'precision': array([0.05388506]), 'recall': array([0.17467615]), 'ndcg': array([0.14890613])}
+[Epoch 107/400] [Batch 200/200] [acc: 1.5808%] [G loss: nan] [Balance loss: 0.836136] [BNS_loss:nan] [S loss: -16634.371094] 
+{'precision': array([0.05393027]), 'recall': array([0.17496793]), 'ndcg': array([0.14911663])}
+[Epoch 108/400] [Batch 200/200] [acc: 1.5690%] [G loss: nan] [Balance loss: 0.836191] [BNS_loss:nan] [S loss: -16634.373047] 
+{'precision': array([0.05388506]), 'recall': array([0.17470402]), 'ndcg': array([0.14892089])}
+[Epoch 109/400] [Batch 200/200] [acc: 1.5795%] [G loss: nan] [Balance loss: 0.835394] [BNS_loss:nan] [S loss: -16634.373047] 
+{'precision': array([0.05376114]), 'recall': array([0.17447168]), 'ndcg': array([0.1487551])}
+[Epoch 110/400] [Batch 200/200] [acc: 1.5555%] [G loss: nan] [Balance loss: 0.836211] [BNS_loss:nan] [S loss: -16634.328125] 
+{'precision': array([0.05375946]), 'recall': array([0.17442514]), 'ndcg': array([0.14877059])}
+[Epoch 111/400] [Batch 200/200] [acc: 1.5565%] [G loss: nan] [Balance loss: 0.836267] [BNS_loss:nan] [S loss: -16634.351562] 
+{'precision': array([0.05389343]), 'recall': array([0.17485062]), 'ndcg': array([0.14894089])}
+[Epoch 112/400] [Batch 200/200] [acc: 1.5779%] [G loss: nan] [Balance loss: 0.836727] [BNS_loss:nan] [S loss: -16634.371094] 
+{'precision': array([0.05381305]), 'recall': array([0.17451738]), 'ndcg': array([0.14877672])}
+[Epoch 113/400] [Batch 200/200] [acc: 1.5648%] [G loss: nan] [Balance loss: 0.835745] [BNS_loss:nan] [S loss: -16634.367188] 
+{'precision': array([0.05370755]), 'recall': array([0.17409392]), 'ndcg': array([0.14872067])}
+[Epoch 114/400] [Batch 200/200] [acc: 1.5541%] [G loss: nan] [Balance loss: 0.835089] [BNS_loss:nan] [S loss: -16634.412109] 
+{'precision': array([0.05371257]), 'recall': array([0.17425845]), 'ndcg': array([0.14866774])}
+[Epoch 115/400] [Batch 200/200] [acc: 1.5398%] [G loss: nan] [Balance loss: 0.836079] [BNS_loss:nan] [S loss: -16634.392578] 
+{'precision': array([0.05390013]), 'recall': array([0.1746689]), 'ndcg': array([0.14893347])}
+[Epoch 116/400] [Batch 200/200] [acc: 1.5669%] [G loss: nan] [Balance loss: 0.835511] [BNS_loss:nan] [S loss: -16634.412109] 
+{'precision': array([0.05378123]), 'recall': array([0.17429487]), 'ndcg': array([0.14868904])}
+[Epoch 117/400] [Batch 200/200] [acc: 1.5303%] [G loss: nan] [Balance loss: 0.835864] [BNS_loss:nan] [S loss: -16634.419922] 
+{'precision': array([0.05371425]), 'recall': array([0.17416227]), 'ndcg': array([0.14865438])}
+[Epoch 118/400] [Batch 200/200] [acc: 1.5526%] [G loss: nan] [Balance loss: 0.836286] [BNS_loss:nan] [S loss: -16634.414062] 
+{'precision': array([0.0537896]), 'recall': array([0.17428176]), 'ndcg': array([0.14881867])}
+[Epoch 119/400] [Batch 200/200] [acc: 1.5593%] [G loss: nan] [Balance loss: 0.835795] [BNS_loss:nan] [S loss: -16634.394531] 
+{'precision': array([0.05375946]), 'recall': array([0.17428319]), 'ndcg': array([0.1486872])}
+[Epoch 120/400] [Batch 200/200] [acc: 1.5524%] [G loss: nan] [Balance loss: 0.836273] [BNS_loss:nan] [S loss: -16634.382812] 
+{'precision': array([0.05379463]), 'recall': array([0.1741542]), 'ndcg': array([0.14875512])}
+[Epoch 121/400] [Batch 200/200] [acc: 1.5332%] [G loss: nan] [Balance loss: 0.836483] [BNS_loss:nan] [S loss: -16634.386719] 
+{'precision': array([0.05375276]), 'recall': array([0.17418627]), 'ndcg': array([0.14886082])}
+[Epoch 122/400] [Batch 200/200] [acc: 1.5603%] [G loss: nan] [Balance loss: 0.836114] [BNS_loss:nan] [S loss: -16634.380859] 
+{'precision': array([0.0536975]), 'recall': array([0.17405526]), 'ndcg': array([0.14857055])}
+[Epoch 123/400] [Batch 200/200] [acc: 1.5493%] [G loss: nan] [Balance loss: 0.835540] [BNS_loss:nan] [S loss: -16634.398438] 
+{'precision': array([0.0537042]), 'recall': array([0.17424491]), 'ndcg': array([0.14869123])}
+[Epoch 124/400] [Batch 200/200] [acc: 1.5468%] [G loss: nan] [Balance loss: 0.835904] [BNS_loss:nan] [S loss: -16634.398438] 
+{'precision': array([0.05375946]), 'recall': array([0.17457763]), 'ndcg': array([0.14880047])}
+[Epoch 125/400] [Batch 200/200] [acc: 1.5836%] [G loss: nan] [Balance loss: 0.836284] [BNS_loss:nan] [S loss: -16634.410156] 
+{'precision': array([0.05379128]), 'recall': array([0.17444154]), 'ndcg': array([0.14868803])}
+[Epoch 126/400] [Batch 200/200] [acc: 1.5505%] [G loss: nan] [Balance loss: 0.837378] [BNS_loss:nan] [S loss: -16634.396484] 
+{'precision': array([0.05377118]), 'recall': array([0.17445439]), 'ndcg': array([0.14864539])}
+[Epoch 127/400] [Batch 200/200] [acc: 1.5472%] [G loss: nan] [Balance loss: 0.835649] [BNS_loss:nan] [S loss: -16634.380859] 
+{'precision': array([0.05378291]), 'recall': array([0.17445824]), 'ndcg': array([0.14871397])}
+[Epoch 128/400] [Batch 200/200] [acc: 1.5490%] [G loss: nan] [Balance loss: 0.836694] [BNS_loss:nan] [S loss: -16634.390625] 
+{'precision': array([0.05376616]), 'recall': array([0.17413742]), 'ndcg': array([0.14844364])}
+[Epoch 129/400] [Batch 200/200] [acc: 1.5552%] [G loss: nan] [Balance loss: 0.835961] [BNS_loss:nan] [S loss: -16634.462891] 
+{'precision': array([0.05374104]), 'recall': array([0.17415923]), 'ndcg': array([0.148639])}
+[Epoch 130/400] [Batch 200/200] [acc: 1.5591%] [G loss: nan] [Balance loss: 0.835735] [BNS_loss:nan] [S loss: -16634.380859] 
+{'precision': array([0.05370922]), 'recall': array([0.1739777]), 'ndcg': array([0.14862999])}
+[Epoch 131/400] [Batch 200/200] [acc: 1.5547%] [G loss: nan] [Balance loss: 0.835430] [BNS_loss:nan] [S loss: -16634.375000] 
+{'precision': array([0.05369248]), 'recall': array([0.17407782]), 'ndcg': array([0.14842223])}
+[Epoch 132/400] [Batch 200/200] [acc: 1.5398%] [G loss: nan] [Balance loss: 0.835575] [BNS_loss:nan] [S loss: -16634.404297] 
+{'precision': array([0.05375946]), 'recall': array([0.17421883]), 'ndcg': array([0.14865812])}
+[Epoch 133/400] [Batch 200/200] [acc: 1.5724%] [G loss: nan] [Balance loss: 0.835842] [BNS_loss:nan] [S loss: -16634.355469] 
+{'precision': array([0.05362382]), 'recall': array([0.17401941]), 'ndcg': array([0.14871357])}
+[Epoch 134/400] [Batch 200/200] [acc: 1.5728%] [G loss: nan] [Balance loss: 0.835510] [BNS_loss:nan] [S loss: -16634.425781] 
+{'precision': array([0.05369248]), 'recall': array([0.17429311]), 'ndcg': array([0.14865477])}
+[Epoch 135/400] [Batch 200/200] [acc: 1.5513%] [G loss: nan] [Balance loss: 0.835593] [BNS_loss:nan] [S loss: -16634.457031] 
+{'precision': array([0.05375109]), 'recall': array([0.1742515]), 'ndcg': array([0.14863369])}
+[Epoch 136/400] [Batch 200/200] [acc: 1.5586%] [G loss: nan] [Balance loss: 0.836041] [BNS_loss:nan] [S loss: -16634.437500] 
+{'precision': array([0.05371425]), 'recall': array([0.17390192]), 'ndcg': array([0.14858007])}
+[Epoch 137/400] [Batch 200/200] [acc: 1.5664%] [G loss: nan] [Balance loss: 0.836101] [BNS_loss:nan] [S loss: -16634.429688] 
+{'precision': array([0.05378625]), 'recall': array([0.17419581]), 'ndcg': array([0.14850165])}
+[Epoch 138/400] [Batch 200/200] [acc: 1.5763%] [G loss: nan] [Balance loss: 0.836550] [BNS_loss:nan] [S loss: -16634.433594] 
+{'precision': array([0.05378123]), 'recall': array([0.17439172]), 'ndcg': array([0.14868972])}
+[Epoch 139/400] [Batch 200/200] [acc: 1.5345%] [G loss: nan] [Balance loss: 0.836309] [BNS_loss:nan] [S loss: -16634.433594] 
+{'precision': array([0.05359368]), 'recall': array([0.17368071]), 'ndcg': array([0.14826284])}
+[Epoch 140/400] [Batch 200/200] [acc: 1.5543%] [G loss: nan] [Balance loss: 0.835536] [BNS_loss:nan] [S loss: -16634.429688] 
+{'precision': array([0.05372262]), 'recall': array([0.17419395]), 'ndcg': array([0.14852242])}
+[Epoch 141/400] [Batch 200/200] [acc: 1.5881%] [G loss: nan] [Balance loss: 0.835346] [BNS_loss:nan] [S loss: -16634.386719] 
+{'precision': array([0.0536841]), 'recall': array([0.17408426]), 'ndcg': array([0.14847469])}
+[Epoch 142/400] [Batch 200/200] [acc: 1.5441%] [G loss: nan] [Balance loss: 0.835366] [BNS_loss:nan] [S loss: -16634.414062] 
+{'precision': array([0.05366066]), 'recall': array([0.17395871]), 'ndcg': array([0.14843355])}
+[Epoch 143/400] [Batch 200/200] [acc: 1.5632%] [G loss: nan] [Balance loss: 0.835478] [BNS_loss:nan] [S loss: -16634.425781] 
+{'precision': array([0.05367908]), 'recall': array([0.17405404]), 'ndcg': array([0.14838933])}
+[Epoch 144/400] [Batch 200/200] [acc: 1.5522%] [G loss: nan] [Balance loss: 0.836595] [BNS_loss:nan] [S loss: -16634.449219] 
+{'precision': array([0.05376951]), 'recall': array([0.1742703]), 'ndcg': array([0.14866856])}
+[Epoch 145/400] [Batch 200/200] [acc: 1.5668%] [G loss: nan] [Balance loss: 0.834913] [BNS_loss:nan] [S loss: -16634.449219] 
+{'precision': array([0.05368913]), 'recall': array([0.17408893]), 'ndcg': array([0.14852172])}
+[Epoch 146/400] [Batch 200/200] [acc: 1.5769%] [G loss: nan] [Balance loss: 0.835398] [BNS_loss:nan] [S loss: -16634.416016] 
+{'precision': array([0.05361377]), 'recall': array([0.17379825]), 'ndcg': array([0.14842925])}
+[Epoch 147/400] [Batch 200/200] [acc: 1.5664%] [G loss: nan] [Balance loss: 0.837181] [BNS_loss:nan] [S loss: -16634.431641] 
+{'precision': array([0.05369248]), 'recall': array([0.1740592]), 'ndcg': array([0.14854415])}
+[Epoch 148/400] [Batch 200/200] [acc: 1.5604%] [G loss: nan] [Balance loss: 0.835613] [BNS_loss:nan] [S loss: -16634.466797] 
+{'precision': array([0.05363052]), 'recall': array([0.17390613]), 'ndcg': array([0.14864357])}
+[Epoch 149/400] [Batch 200/200] [acc: 1.5569%] [G loss: nan] [Balance loss: 0.835622] [BNS_loss:nan] [S loss: -16634.382812] 
+{'precision': array([0.05361545]), 'recall': array([0.17395196]), 'ndcg': array([0.14854593])}
+[Epoch 150/400] [Batch 200/200] [acc: 1.5853%] [G loss: nan] [Balance loss: 0.836833] [BNS_loss:nan] [S loss: -16634.410156] 
+{'precision': array([0.05367741]), 'recall': array([0.17399238]), 'ndcg': array([0.14853196])}
+[Epoch 151/400] [Batch 200/200] [acc: 1.5774%] [G loss: nan] [Balance loss: 0.835463] [BNS_loss:nan] [S loss: -16634.457031] 
+{'precision': array([0.05370922]), 'recall': array([0.1741482]), 'ndcg': array([0.1485048])}
+[Epoch 152/400] [Batch 200/200] [acc: 1.5658%] [G loss: nan] [Balance loss: 0.836021] [BNS_loss:nan] [S loss: -16634.480469] 
+{'precision': array([0.05368243]), 'recall': array([0.1742217]), 'ndcg': array([0.14846927])}
+[Epoch 153/400] [Batch 200/200] [acc: 1.5565%] [G loss: nan] [Balance loss: 0.836421] [BNS_loss:nan] [S loss: -16634.431641] 
+{'precision': array([0.05367741]), 'recall': array([0.17412767]), 'ndcg': array([0.14834163])}
+[Epoch 154/400] [Batch 200/200] [acc: 1.5577%] [G loss: nan] [Balance loss: 0.836385] [BNS_loss:nan] [S loss: -16634.429688] 
+{'precision': array([0.05362884]), 'recall': array([0.17413489]), 'ndcg': array([0.14854612])}
+[Epoch 155/400] [Batch 200/200] [acc: 1.5701%] [G loss: nan] [Balance loss: 0.836802] [BNS_loss:nan] [S loss: -16634.398438] 
+{'precision': array([0.05361042]), 'recall': array([0.1736985]), 'ndcg': array([0.14822825])}
+[Epoch 156/400] [Batch 200/200] [acc: 1.5599%] [G loss: nan] [Balance loss: 0.835322] [BNS_loss:nan] [S loss: -16634.468750] 
+{'precision': array([0.05375779]), 'recall': array([0.17423845]), 'ndcg': array([0.14855864])}
+[Epoch 157/400] [Batch 200/200] [acc: 1.5542%] [G loss: nan] [Balance loss: 0.836468] [BNS_loss:nan] [S loss: -16634.484375] 
+{'precision': array([0.05365731]), 'recall': array([0.17400274]), 'ndcg': array([0.14839651])}
+[Epoch 158/400] [Batch 200/200] [acc: 1.5529%] [G loss: nan] [Balance loss: 0.836730] [BNS_loss:nan] [S loss: -16634.468750] 
+{'precision': array([0.05367406]), 'recall': array([0.17417413]), 'ndcg': array([0.14852808])}
+[Epoch 159/400] [Batch 200/200] [acc: 1.5643%] [G loss: nan] [Balance loss: 0.835995] [BNS_loss:nan] [S loss: -16634.410156] 
+{'precision': array([0.05368243]), 'recall': array([0.17401646]), 'ndcg': array([0.14844957])}
+[Epoch 160/400] [Batch 200/200] [acc: 1.5377%] [G loss: nan] [Balance loss: 0.836430] [BNS_loss:nan] [S loss: -16634.470703] 
+{'precision': array([0.05369415]), 'recall': array([0.17411043]), 'ndcg': array([0.14853756])}
+[Epoch 161/400] [Batch 200/200] [acc: 1.5646%] [G loss: nan] [Balance loss: 0.835855] [BNS_loss:nan] [S loss: -16634.457031] 
+{'precision': array([0.05365899]), 'recall': array([0.17403322]), 'ndcg': array([0.14843473])}
+[Epoch 162/400] [Batch 200/200] [acc: 1.5558%] [G loss: nan] [Balance loss: 0.836327] [BNS_loss:nan] [S loss: -16634.457031] 
+{'precision': array([0.05369918]), 'recall': array([0.17420874]), 'ndcg': array([0.14836392])}
+[Epoch 163/400] [Batch 200/200] [acc: 1.5327%] [G loss: nan] [Balance loss: 0.836662] [BNS_loss:nan] [S loss: -16634.474609] 
+{'precision': array([0.05358195]), 'recall': array([0.17390401]), 'ndcg': array([0.1482659])}
+[Epoch 164/400] [Batch 200/200] [acc: 1.5559%] [G loss: nan] [Balance loss: 0.836020] [BNS_loss:nan] [S loss: -16634.445312] 
+{'precision': array([0.05360875]), 'recall': array([0.17386986]), 'ndcg': array([0.14829399])}
+[Epoch 165/400] [Batch 200/200] [acc: 1.5388%] [G loss: nan] [Balance loss: 0.835275] [BNS_loss:nan] [S loss: -16634.462891] 
+{'precision': array([0.05362047]), 'recall': array([0.17387047]), 'ndcg': array([0.14830953])}
+[Epoch 166/400] [Batch 200/200] [acc: 1.5626%] [G loss: nan] [Balance loss: 0.836857] [BNS_loss:nan] [S loss: -16634.484375] 
+{'precision': array([0.05373099]), 'recall': array([0.17423815]), 'ndcg': array([0.14860315])}
+[Epoch 167/400] [Batch 200/200] [acc: 1.5419%] [G loss: nan] [Balance loss: 0.835406] [BNS_loss:nan] [S loss: -16634.457031] 
+{'precision': array([0.05366568]), 'recall': array([0.17404243]), 'ndcg': array([0.1484349])}
+[Epoch 168/400] [Batch 200/200] [acc: 1.5746%] [G loss: nan] [Balance loss: 0.835272] [BNS_loss:nan] [S loss: -16634.464844] 
+{'precision': array([0.05362717]), 'recall': array([0.17408239]), 'ndcg': array([0.14832749])}
+[Epoch 169/400] [Batch 200/200] [acc: 1.5532%] [G loss: nan] [Balance loss: 0.835339] [BNS_loss:nan] [S loss: -16634.460938] 
+{'precision': array([0.05363722]), 'recall': array([0.17417288]), 'ndcg': array([0.14859651])}
+[Epoch 170/400] [Batch 200/200] [acc: 1.5419%] [G loss: nan] [Balance loss: 0.835620] [BNS_loss:nan] [S loss: -16634.503906] 
+{'precision': array([0.05353507]), 'recall': array([0.17368662]), 'ndcg': array([0.14842034])}
+[Epoch 171/400] [Batch 200/200] [acc: 1.5808%] [G loss: nan] [Balance loss: 0.835649] [BNS_loss:nan] [S loss: -16634.478516] 
+{'precision': array([0.05364391]), 'recall': array([0.17393263]), 'ndcg': array([0.14834269])}
+[Epoch 172/400] [Batch 200/200] [acc: 1.5378%] [G loss: nan] [Balance loss: 0.834992] [BNS_loss:nan] [S loss: -16634.464844] 
+{'precision': array([0.05367406]), 'recall': array([0.17387201]), 'ndcg': array([0.14835546])}
+[Epoch 173/400] [Batch 200/200] [acc: 1.5576%] [G loss: nan] [Balance loss: 0.836774] [BNS_loss:nan] [S loss: -16634.466797] 
+{'precision': array([0.05349488]), 'recall': array([0.17332713]), 'ndcg': array([0.1481159])}
+[Epoch 174/400] [Batch 200/200] [acc: 1.5555%] [G loss: nan] [Balance loss: 0.836479] [BNS_loss:nan] [S loss: -16634.486328] 
+{'precision': array([0.05370085]), 'recall': array([0.17424195]), 'ndcg': array([0.14828024])}
+[Epoch 175/400] [Batch 200/200] [acc: 1.5464%] [G loss: nan] [Balance loss: 0.835708] [BNS_loss:nan] [S loss: -16634.492188] 
+{'precision': array([0.05356186]), 'recall': array([0.1737867]), 'ndcg': array([0.14821889])}
+[Epoch 176/400] [Batch 200/200] [acc: 1.5596%] [G loss: nan] [Balance loss: 0.835792] [BNS_loss:nan] [S loss: -16634.507812] 
+{'precision': array([0.05357861]), 'recall': array([0.1739557]), 'ndcg': array([0.14832058])}
+[Epoch 177/400] [Batch 200/200] [acc: 1.5636%] [G loss: nan] [Balance loss: 0.836397] [BNS_loss:nan] [S loss: -16634.500000] 
+{'precision': array([0.05356186]), 'recall': array([0.17382835]), 'ndcg': array([0.14826532])}
+[Epoch 178/400] [Batch 200/200] [acc: 1.5421%] [G loss: nan] [Balance loss: 0.837083] [BNS_loss:nan] [S loss: -16634.505859] 
+{'precision': array([0.05360205]), 'recall': array([0.17367618]), 'ndcg': array([0.14822856])}
+[Epoch 179/400] [Batch 200/200] [acc: 1.5483%] [G loss: nan] [Balance loss: 0.835881] [BNS_loss:nan] [S loss: -16634.500000] 
+{'precision': array([0.05373099]), 'recall': array([0.17439903]), 'ndcg': array([0.14857701])}
+[Epoch 180/400] [Batch 200/200] [acc: 1.5850%] [G loss: nan] [Balance loss: 0.835753] [BNS_loss:nan] [S loss: -16634.486328] 
+{'precision': array([0.0536841]), 'recall': array([0.17392376]), 'ndcg': array([0.14839249])}
+[Epoch 181/400] [Batch 200/200] [acc: 1.5714%] [G loss: nan] [Balance loss: 0.836514] [BNS_loss:nan] [S loss: -16634.460938] 
+{'precision': array([0.05368076]), 'recall': array([0.1740956]), 'ndcg': array([0.14850636])}
+[Epoch 182/400] [Batch 200/200] [acc: 1.5570%] [G loss: nan] [Balance loss: 0.834929] [BNS_loss:nan] [S loss: -16634.517578] 
+{'precision': array([0.05363052]), 'recall': array([0.17390075]), 'ndcg': array([0.1481035])}
+[Epoch 183/400] [Batch 200/200] [acc: 1.5347%] [G loss: nan] [Balance loss: 0.836074] [BNS_loss:nan] [S loss: -16634.455078] 
+{'precision': array([0.05355516]), 'recall': array([0.1737019]), 'ndcg': array([0.14810331])}
+[Epoch 184/400] [Batch 200/200] [acc: 1.5663%] [G loss: nan] [Balance loss: 0.835452] [BNS_loss:nan] [S loss: -16634.486328] 
+{'precision': array([0.05364057]), 'recall': array([0.17419259]), 'ndcg': array([0.14825031])}
+[Epoch 185/400] [Batch 200/200] [acc: 1.5494%] [G loss: nan] [Balance loss: 0.835573] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.0535987]), 'recall': array([0.17368562]), 'ndcg': array([0.14817331])}
+[Epoch 186/400] [Batch 200/200] [acc: 1.5492%] [G loss: nan] [Balance loss: 0.835794] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.05359033]), 'recall': array([0.17393054]), 'ndcg': array([0.14822954])}
+[Epoch 187/400] [Batch 200/200] [acc: 1.5591%] [G loss: nan] [Balance loss: 0.836558] [BNS_loss:nan] [S loss: -16634.515625] 
+{'precision': array([0.05352669]), 'recall': array([0.17364657]), 'ndcg': array([0.14798193])}
+[Epoch 188/400] [Batch 200/200] [acc: 1.5559%] [G loss: nan] [Balance loss: 0.836365] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05352167]), 'recall': array([0.17372467]), 'ndcg': array([0.14820548])}
+[Epoch 189/400] [Batch 200/200] [acc: 1.5469%] [G loss: nan] [Balance loss: 0.835742] [BNS_loss:nan] [S loss: -16634.496094] 
+{'precision': array([0.05360205]), 'recall': array([0.17393434]), 'ndcg': array([0.14823254])}
+[Epoch 190/400] [Batch 200/200] [acc: 1.5449%] [G loss: nan] [Balance loss: 0.834974] [BNS_loss:nan] [S loss: -16634.494141] 
+{'precision': array([0.05359535]), 'recall': array([0.1737226]), 'ndcg': array([0.14822569])}
+[Epoch 191/400] [Batch 200/200] [acc: 1.5787%] [G loss: nan] [Balance loss: 0.836285] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05361545]), 'recall': array([0.17389329]), 'ndcg': array([0.1481468])}
+[Epoch 192/400] [Batch 200/200] [acc: 1.5762%] [G loss: nan] [Balance loss: 0.836212] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05350325]), 'recall': array([0.1735084]), 'ndcg': array([0.14800237])}
+[Epoch 193/400] [Batch 200/200] [acc: 1.5697%] [G loss: nan] [Balance loss: 0.835190] [BNS_loss:nan] [S loss: -16634.482422] 
+{'precision': array([0.05365731]), 'recall': array([0.17422733]), 'ndcg': array([0.14820927])}
+[Epoch 194/400] [Batch 200/200] [acc: 1.5770%] [G loss: nan] [Balance loss: 0.836432] [BNS_loss:nan] [S loss: -16634.529297] 
+{'precision': array([0.05354679]), 'recall': array([0.17397873]), 'ndcg': array([0.14819965])}
+[Epoch 195/400] [Batch 200/200] [acc: 1.5521%] [G loss: nan] [Balance loss: 0.836345] [BNS_loss:nan] [S loss: -16634.503906] 
+{'precision': array([0.05352334]), 'recall': array([0.17365368]), 'ndcg': array([0.1481101])}
+[Epoch 196/400] [Batch 200/200] [acc: 1.5320%] [G loss: nan] [Balance loss: 0.835628] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05355684]), 'recall': array([0.17361142]), 'ndcg': array([0.14822894])}
+[Epoch 197/400] [Batch 200/200] [acc: 1.5685%] [G loss: nan] [Balance loss: 0.836632] [BNS_loss:nan] [S loss: -16634.505859] 
+{'precision': array([0.05352837]), 'recall': array([0.17348902]), 'ndcg': array([0.14807541])}
+[Epoch 198/400] [Batch 200/200] [acc: 1.5714%] [G loss: nan] [Balance loss: 0.835820] [BNS_loss:nan] [S loss: -16634.517578] 
+{'precision': array([0.0535066]), 'recall': array([0.17369191]), 'ndcg': array([0.148197])}
+[Epoch 199/400] [Batch 200/200] [acc: 1.5549%] [G loss: nan] [Balance loss: 0.836308] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05362717]), 'recall': array([0.17393053]), 'ndcg': array([0.14825427])}
+[Epoch 200/400] [Batch 200/200] [acc: 1.5796%] [G loss: nan] [Balance loss: 0.835906] [BNS_loss:nan] [S loss: -16634.494141] 
+{'precision': array([0.0535133]), 'recall': array([0.17338876]), 'ndcg': array([0.1478326])}
+[Epoch 201/400] [Batch 200/200] [acc: 1.5537%] [G loss: nan] [Balance loss: 0.836055] [BNS_loss:nan] [S loss: -16634.580078] 
+{'precision': array([0.0535987]), 'recall': array([0.17383779]), 'ndcg': array([0.14815412])}
+[Epoch 202/400] [Batch 200/200] [acc: 1.5817%] [G loss: nan] [Balance loss: 0.836355] [BNS_loss:nan] [S loss: -16634.552734] 
+{'precision': array([0.05360205]), 'recall': array([0.17386066]), 'ndcg': array([0.14814556])}
+[Epoch 203/400] [Batch 200/200] [acc: 1.5538%] [G loss: nan] [Balance loss: 0.836727] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05352669]), 'recall': array([0.17366177]), 'ndcg': array([0.14799092])}
+[Epoch 204/400] [Batch 200/200] [acc: 1.5675%] [G loss: nan] [Balance loss: 0.836190] [BNS_loss:nan] [S loss: -16634.548828] 
+{'precision': array([0.05355851]), 'recall': array([0.17367873]), 'ndcg': array([0.14816488])}
+[Epoch 205/400] [Batch 200/200] [acc: 1.5702%] [G loss: nan] [Balance loss: 0.835832] [BNS_loss:nan] [S loss: -16634.537109] 
+{'precision': array([0.05341952]), 'recall': array([0.17329216]), 'ndcg': array([0.14794075])}
+[Epoch 206/400] [Batch 200/200] [acc: 1.5634%] [G loss: nan] [Balance loss: 0.836236] [BNS_loss:nan] [S loss: -16634.537109] 
+{'precision': array([0.05352334]), 'recall': array([0.17359085]), 'ndcg': array([0.14807659])}
+[Epoch 207/400] [Batch 200/200] [acc: 1.5438%] [G loss: nan] [Balance loss: 0.836077] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05363554]), 'recall': array([0.17398511]), 'ndcg': array([0.14836002])}
+[Epoch 208/400] [Batch 200/200] [acc: 1.5757%] [G loss: nan] [Balance loss: 0.835623] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05353507]), 'recall': array([0.17367428]), 'ndcg': array([0.14819235])}
+[Epoch 209/400] [Batch 200/200] [acc: 1.5515%] [G loss: nan] [Balance loss: 0.836185] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05365229]), 'recall': array([0.17398264]), 'ndcg': array([0.14833345])}
+[Epoch 210/400] [Batch 200/200] [acc: 1.5773%] [G loss: nan] [Balance loss: 0.835835] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05357526]), 'recall': array([0.17361552]), 'ndcg': array([0.14804945])}
+[Epoch 211/400] [Batch 200/200] [acc: 1.5455%] [G loss: nan] [Balance loss: 0.835386] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05360038]), 'recall': array([0.17370218]), 'ndcg': array([0.14818522])}
+[Epoch 212/400] [Batch 200/200] [acc: 1.5385%] [G loss: nan] [Balance loss: 0.836128] [BNS_loss:nan] [S loss: -16634.500000] 
+{'precision': array([0.05358363]), 'recall': array([0.17388765]), 'ndcg': array([0.14826482])}
+[Epoch 213/400] [Batch 200/200] [acc: 1.5526%] [G loss: nan] [Balance loss: 0.836092] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05354344]), 'recall': array([0.17379668]), 'ndcg': array([0.14808061])}
+[Epoch 214/400] [Batch 200/200] [acc: 1.5614%] [G loss: nan] [Balance loss: 0.836043] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05355684]), 'recall': array([0.17358901]), 'ndcg': array([0.1481855])}
+[Epoch 215/400] [Batch 200/200] [acc: 1.5511%] [G loss: nan] [Balance loss: 0.836281] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.05355181]), 'recall': array([0.17360417]), 'ndcg': array([0.1480925])}
+[Epoch 216/400] [Batch 200/200] [acc: 1.5659%] [G loss: nan] [Balance loss: 0.836818] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05358195]), 'recall': array([0.17378898]), 'ndcg': array([0.14823958])}
+[Epoch 217/400] [Batch 200/200] [acc: 1.5802%] [G loss: nan] [Balance loss: 0.835208] [BNS_loss:nan] [S loss: -16634.548828] 
+{'precision': array([0.05365564]), 'recall': array([0.1741932]), 'ndcg': array([0.14836379])}
+[Epoch 218/400] [Batch 200/200] [acc: 1.5675%] [G loss: nan] [Balance loss: 0.835176] [BNS_loss:nan] [S loss: -16634.525391] 
+{'precision': array([0.05363052]), 'recall': array([0.1739967]), 'ndcg': array([0.14820236])}
+[Epoch 219/400] [Batch 200/200] [acc: 1.5577%] [G loss: nan] [Balance loss: 0.835899] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05353674]), 'recall': array([0.17346371]), 'ndcg': array([0.14803112])}
+[Epoch 220/400] [Batch 200/200] [acc: 1.5621%] [G loss: nan] [Balance loss: 0.835816] [BNS_loss:nan] [S loss: -16634.541016] 
+{'precision': array([0.05344296]), 'recall': array([0.17324951]), 'ndcg': array([0.1479326])}
+[Epoch 221/400] [Batch 200/200] [acc: 1.5667%] [G loss: nan] [Balance loss: 0.837313] [BNS_loss:nan] [S loss: -16634.507812] 
+{'precision': array([0.05363889]), 'recall': array([0.17403335]), 'ndcg': array([0.14823298])}
+[Epoch 222/400] [Batch 200/200] [acc: 1.5231%] [G loss: nan] [Balance loss: 0.836705] [BNS_loss:nan] [S loss: -16634.525391] 
+{'precision': array([0.0534798]), 'recall': array([0.17346977]), 'ndcg': array([0.1479558])}
+[Epoch 223/400] [Batch 200/200] [acc: 1.5767%] [G loss: nan] [Balance loss: 0.835823] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05352334]), 'recall': array([0.17366003]), 'ndcg': array([0.14816188])}
+[Epoch 224/400] [Batch 200/200] [acc: 1.5526%] [G loss: nan] [Balance loss: 0.835593] [BNS_loss:nan] [S loss: -16634.503906] 
+{'precision': array([0.05351665]), 'recall': array([0.17377769]), 'ndcg': array([0.14815484])}
+[Epoch 225/400] [Batch 200/200] [acc: 1.5581%] [G loss: nan] [Balance loss: 0.835662] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05355349]), 'recall': array([0.1734991]), 'ndcg': array([0.14812851])}
+[Epoch 226/400] [Batch 200/200] [acc: 1.5645%] [G loss: nan] [Balance loss: 0.835903] [BNS_loss:nan] [S loss: -16634.488281] 
+{'precision': array([0.05354009]), 'recall': array([0.17387055]), 'ndcg': array([0.14802057])}
+[Epoch 227/400] [Batch 200/200] [acc: 1.5392%] [G loss: nan] [Balance loss: 0.836507] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.05359033]), 'recall': array([0.17360163]), 'ndcg': array([0.14834847])}
+[Epoch 228/400] [Batch 200/200] [acc: 1.5859%] [G loss: nan] [Balance loss: 0.836419] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05366736]), 'recall': array([0.17399919]), 'ndcg': array([0.14832716])}
+[Epoch 229/400] [Batch 200/200] [acc: 1.5773%] [G loss: nan] [Balance loss: 0.837201] [BNS_loss:nan] [S loss: -16634.529297] 
+{'precision': array([0.05349153]), 'recall': array([0.17365736]), 'ndcg': array([0.14802294])}
+[Epoch 230/400] [Batch 200/200] [acc: 1.5779%] [G loss: nan] [Balance loss: 0.836139] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05348818]), 'recall': array([0.17368579]), 'ndcg': array([0.14810636])}
+[Epoch 231/400] [Batch 200/200] [acc: 1.5510%] [G loss: nan] [Balance loss: 0.836591] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05351497]), 'recall': array([0.17357901]), 'ndcg': array([0.14801808])}
+[Epoch 232/400] [Batch 200/200] [acc: 1.5513%] [G loss: nan] [Balance loss: 0.835761] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05349488]), 'recall': array([0.17347832]), 'ndcg': array([0.14811378])}
+[Epoch 233/400] [Batch 200/200] [acc: 1.5591%] [G loss: nan] [Balance loss: 0.836490] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05360205]), 'recall': array([0.17418578]), 'ndcg': array([0.14815796])}
+[Epoch 234/400] [Batch 200/200] [acc: 1.5604%] [G loss: nan] [Balance loss: 0.836480] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05355181]), 'recall': array([0.17367838]), 'ndcg': array([0.1482966])}
+[Epoch 235/400] [Batch 200/200] [acc: 1.5391%] [G loss: nan] [Balance loss: 0.835236] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05357693]), 'recall': array([0.17408566]), 'ndcg': array([0.14823851])}
+[Epoch 236/400] [Batch 200/200] [acc: 1.5853%] [G loss: nan] [Balance loss: 0.835974] [BNS_loss:nan] [S loss: -16634.521484] 
+{'precision': array([0.05357023]), 'recall': array([0.17379297]), 'ndcg': array([0.14826004])}
+[Epoch 237/400] [Batch 200/200] [acc: 1.5594%] [G loss: nan] [Balance loss: 0.836190] [BNS_loss:nan] [S loss: -16634.515625] 
+{'precision': array([0.05356353]), 'recall': array([0.17358871]), 'ndcg': array([0.14812022])}
+[Epoch 238/400] [Batch 200/200] [acc: 1.5642%] [G loss: nan] [Balance loss: 0.836467] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05352502]), 'recall': array([0.17350361]), 'ndcg': array([0.14833338])}
+[Epoch 239/400] [Batch 200/200] [acc: 1.5801%] [G loss: nan] [Balance loss: 0.836426] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05351162]), 'recall': array([0.17359405]), 'ndcg': array([0.14818473])}
+[Epoch 240/400] [Batch 200/200] [acc: 1.5513%] [G loss: nan] [Balance loss: 0.836313] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05362047]), 'recall': array([0.17392144]), 'ndcg': array([0.148251])}
+[Epoch 241/400] [Batch 200/200] [acc: 1.5444%] [G loss: nan] [Balance loss: 0.836310] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05361042]), 'recall': array([0.17373051]), 'ndcg': array([0.14809102])}
+[Epoch 242/400] [Batch 200/200] [acc: 1.5487%] [G loss: nan] [Balance loss: 0.834071] [BNS_loss:nan] [S loss: -16634.529297] 
+{'precision': array([0.05356018]), 'recall': array([0.17378729]), 'ndcg': array([0.148214])}
+[Epoch 243/400] [Batch 200/200] [acc: 1.5745%] [G loss: nan] [Balance loss: 0.835452] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05360707]), 'recall': array([0.17412716]), 'ndcg': array([0.14821455])}
+[Epoch 244/400] [Batch 200/200] [acc: 1.5522%] [G loss: nan] [Balance loss: 0.835655] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05351162]), 'recall': array([0.17357887]), 'ndcg': array([0.14805771])}
+[Epoch 245/400] [Batch 200/200] [acc: 1.5634%] [G loss: nan] [Balance loss: 0.835388] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05363052]), 'recall': array([0.17399682]), 'ndcg': array([0.14826294])}
+[Epoch 246/400] [Batch 200/200] [acc: 1.5557%] [G loss: nan] [Balance loss: 0.835896] [BNS_loss:nan] [S loss: -16634.556641] 
+{'precision': array([0.05344296]), 'recall': array([0.17334]), 'ndcg': array([0.14800205])}
+[Epoch 247/400] [Batch 200/200] [acc: 1.5205%] [G loss: nan] [Balance loss: 0.836951] [BNS_loss:nan] [S loss: -16634.548828] 
+{'precision': array([0.05357191]), 'recall': array([0.17373593]), 'ndcg': array([0.14819006])}
+[Epoch 248/400] [Batch 200/200] [acc: 1.5576%] [G loss: nan] [Balance loss: 0.835337] [BNS_loss:nan] [S loss: -16634.529297] 
+{'precision': array([0.05356521]), 'recall': array([0.1738406]), 'ndcg': array([0.1481235])}
+[Epoch 249/400] [Batch 200/200] [acc: 1.5566%] [G loss: nan] [Balance loss: 0.836391] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05346306]), 'recall': array([0.17347979]), 'ndcg': array([0.14797393])}
+[Epoch 250/400] [Batch 200/200] [acc: 1.5496%] [G loss: nan] [Balance loss: 0.836817] [BNS_loss:nan] [S loss: -16634.544922] 
+{'precision': array([0.05358028]), 'recall': array([0.17378787]), 'ndcg': array([0.14806026])}
+[Epoch 251/400] [Batch 200/200] [acc: 1.5593%] [G loss: nan] [Balance loss: 0.835412] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05342454]), 'recall': array([0.17334846]), 'ndcg': array([0.14784896])}
+[Epoch 252/400] [Batch 200/200] [acc: 1.5565%] [G loss: nan] [Balance loss: 0.836483] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05339607]), 'recall': array([0.17282206]), 'ndcg': array([0.14786361])}
+[Epoch 253/400] [Batch 200/200] [acc: 1.5695%] [G loss: nan] [Balance loss: 0.835559] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05352669]), 'recall': array([0.17367763]), 'ndcg': array([0.14820513])}
+[Epoch 254/400] [Batch 200/200] [acc: 1.5518%] [G loss: nan] [Balance loss: 0.834875] [BNS_loss:nan] [S loss: -16634.488281] 
+{'precision': array([0.0534798]), 'recall': array([0.17342475]), 'ndcg': array([0.14801796])}
+[Epoch 255/400] [Batch 200/200] [acc: 1.5624%] [G loss: nan] [Balance loss: 0.835450] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05356186]), 'recall': array([0.17353523]), 'ndcg': array([0.1480463])}
+[Epoch 256/400] [Batch 200/200] [acc: 1.5435%] [G loss: nan] [Balance loss: 0.835470] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.05353172]), 'recall': array([0.1738122]), 'ndcg': array([0.14817535])}
+[Epoch 257/400] [Batch 200/200] [acc: 1.5598%] [G loss: nan] [Balance loss: 0.834996] [BNS_loss:nan] [S loss: -16634.544922] 
+{'precision': array([0.0535066]), 'recall': array([0.17366399]), 'ndcg': array([0.14814402])}
+[Epoch 258/400] [Batch 200/200] [acc: 1.5620%] [G loss: nan] [Balance loss: 0.835972] [BNS_loss:nan] [S loss: -16634.492188] 
+{'precision': array([0.05352669]), 'recall': array([0.17347916]), 'ndcg': array([0.14818979])}
+[Epoch 259/400] [Batch 200/200] [acc: 1.5641%] [G loss: nan] [Balance loss: 0.836508] [BNS_loss:nan] [S loss: -16634.503906] 
+{'precision': array([0.05345971]), 'recall': array([0.17350867]), 'ndcg': array([0.14799245])}
+[Epoch 260/400] [Batch 200/200] [acc: 1.5493%] [G loss: nan] [Balance loss: 0.836127] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05349153]), 'recall': array([0.17351208]), 'ndcg': array([0.14801786])}
+[Epoch 261/400] [Batch 200/200] [acc: 1.5630%] [G loss: nan] [Balance loss: 0.835662] [BNS_loss:nan] [S loss: -16634.509766] 
+{'precision': array([0.05347646]), 'recall': array([0.17338479]), 'ndcg': array([0.14795587])}
+[Epoch 262/400] [Batch 200/200] [acc: 1.5734%] [G loss: nan] [Balance loss: 0.835036] [BNS_loss:nan] [S loss: -16634.509766] 
+{'precision': array([0.0534932]), 'recall': array([0.17347037]), 'ndcg': array([0.14797004])}
+[Epoch 263/400] [Batch 200/200] [acc: 1.5619%] [G loss: nan] [Balance loss: 0.836165] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05351497]), 'recall': array([0.17357536]), 'ndcg': array([0.14812523])}
+[Epoch 264/400] [Batch 200/200] [acc: 1.5587%] [G loss: nan] [Balance loss: 0.836070] [BNS_loss:nan] [S loss: -16634.552734] 
+{'precision': array([0.05357526]), 'recall': array([0.17385293]), 'ndcg': array([0.14829788])}
+[Epoch 265/400] [Batch 200/200] [acc: 1.5490%] [G loss: nan] [Balance loss: 0.836538] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05353339]), 'recall': array([0.17350471]), 'ndcg': array([0.14814837])}
+[Epoch 266/400] [Batch 200/200] [acc: 1.5422%] [G loss: nan] [Balance loss: 0.835599] [BNS_loss:nan] [S loss: -16634.560547] 
+{'precision': array([0.05356521]), 'recall': array([0.17371682]), 'ndcg': array([0.14819434])}
+[Epoch 267/400] [Batch 200/200] [acc: 1.5339%] [G loss: nan] [Balance loss: 0.835807] [BNS_loss:nan] [S loss: -16634.509766] 
+{'precision': array([0.05350325]), 'recall': array([0.17355991]), 'ndcg': array([0.14821029])}
+[Epoch 268/400] [Batch 200/200] [acc: 1.5582%] [G loss: nan] [Balance loss: 0.835905] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05347813]), 'recall': array([0.17345276]), 'ndcg': array([0.14803861])}
+[Epoch 269/400] [Batch 200/200] [acc: 1.5680%] [G loss: nan] [Balance loss: 0.835204] [BNS_loss:nan] [S loss: -16634.548828] 
+{'precision': array([0.05351832]), 'recall': array([0.17351649]), 'ndcg': array([0.14797106])}
+[Epoch 270/400] [Batch 200/200] [acc: 1.5575%] [G loss: nan] [Balance loss: 0.835382] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05344464]), 'recall': array([0.17333891]), 'ndcg': array([0.14798842])}
+[Epoch 271/400] [Batch 200/200] [acc: 1.5698%] [G loss: nan] [Balance loss: 0.836180] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05350325]), 'recall': array([0.17348884]), 'ndcg': array([0.14807194])}
+[Epoch 272/400] [Batch 200/200] [acc: 1.5570%] [G loss: nan] [Balance loss: 0.836770] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05354511]), 'recall': array([0.17381705]), 'ndcg': array([0.1480741])}
+[Epoch 273/400] [Batch 200/200] [acc: 1.5457%] [G loss: nan] [Balance loss: 0.834958] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05352502]), 'recall': array([0.17359114]), 'ndcg': array([0.14816842])}
+[Epoch 274/400] [Batch 200/200] [acc: 1.5719%] [G loss: nan] [Balance loss: 0.834799] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.0535853]), 'recall': array([0.17371939]), 'ndcg': array([0.1482422])}
+[Epoch 275/400] [Batch 200/200] [acc: 1.5690%] [G loss: nan] [Balance loss: 0.836212] [BNS_loss:nan] [S loss: -16634.507812] 
+{'precision': array([0.05352167]), 'recall': array([0.17362948]), 'ndcg': array([0.14793179])}
+[Epoch 276/400] [Batch 200/200] [acc: 1.5317%] [G loss: nan] [Balance loss: 0.836318] [BNS_loss:nan] [S loss: -16634.509766] 
+{'precision': array([0.05349655]), 'recall': array([0.17353152]), 'ndcg': array([0.14797446])}
+[Epoch 277/400] [Batch 200/200] [acc: 1.5663%] [G loss: nan] [Balance loss: 0.836570] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05351497]), 'recall': array([0.17346954]), 'ndcg': array([0.14803732])}
+[Epoch 278/400] [Batch 200/200] [acc: 1.5490%] [G loss: nan] [Balance loss: 0.835476] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05344799]), 'recall': array([0.17346081]), 'ndcg': array([0.1481621])}
+[Epoch 279/400] [Batch 200/200] [acc: 1.5481%] [G loss: nan] [Balance loss: 0.835965] [BNS_loss:nan] [S loss: -16634.523438] 
+{'precision': array([0.05349822]), 'recall': array([0.17371156]), 'ndcg': array([0.14795784])}
+[Epoch 280/400] [Batch 200/200] [acc: 1.5450%] [G loss: nan] [Balance loss: 0.835719] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05344464]), 'recall': array([0.17340411]), 'ndcg': array([0.14802077])}
+[Epoch 281/400] [Batch 200/200] [acc: 1.5668%] [G loss: nan] [Balance loss: 0.836061] [BNS_loss:nan] [S loss: -16634.529297] 
+{'precision': array([0.05348315]), 'recall': array([0.17327232]), 'ndcg': array([0.14795629])}
+[Epoch 282/400] [Batch 200/200] [acc: 1.5557%] [G loss: nan] [Balance loss: 0.835458] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05364894]), 'recall': array([0.17380336]), 'ndcg': array([0.14809885])}
+[Epoch 283/400] [Batch 200/200] [acc: 1.5542%] [G loss: nan] [Balance loss: 0.836082] [BNS_loss:nan] [S loss: -16634.519531] 
+{'precision': array([0.05349822]), 'recall': array([0.17355105]), 'ndcg': array([0.1479477])}
+[Epoch 284/400] [Batch 200/200] [acc: 1.5338%] [G loss: nan] [Balance loss: 0.837405] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.05345803]), 'recall': array([0.17342248]), 'ndcg': array([0.14803175])}
+[Epoch 285/400] [Batch 200/200] [acc: 1.5315%] [G loss: nan] [Balance loss: 0.835714] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05350827]), 'recall': array([0.17351788]), 'ndcg': array([0.14795919])}
+[Epoch 286/400] [Batch 200/200] [acc: 1.5590%] [G loss: nan] [Balance loss: 0.835880] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.0536121]), 'recall': array([0.17379663]), 'ndcg': array([0.14816353])}
+[Epoch 287/400] [Batch 200/200] [acc: 1.5703%] [G loss: nan] [Balance loss: 0.835826] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05361545]), 'recall': array([0.17393306]), 'ndcg': array([0.14819716])}
+[Epoch 288/400] [Batch 200/200] [acc: 1.5835%] [G loss: nan] [Balance loss: 0.836760] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05363052]), 'recall': array([0.17396759]), 'ndcg': array([0.14836469])}
+[Epoch 289/400] [Batch 200/200] [acc: 1.5292%] [G loss: nan] [Balance loss: 0.835440] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05355516]), 'recall': array([0.1738024]), 'ndcg': array([0.14808196])}
+[Epoch 290/400] [Batch 200/200] [acc: 1.5640%] [G loss: nan] [Balance loss: 0.836139] [BNS_loss:nan] [S loss: -16634.552734] 
+{'precision': array([0.05355181]), 'recall': array([0.17370649]), 'ndcg': array([0.14812847])}
+[Epoch 291/400] [Batch 200/200] [acc: 1.5680%] [G loss: nan] [Balance loss: 0.835703] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05342622]), 'recall': array([0.17304899]), 'ndcg': array([0.14792796])}
+[Epoch 292/400] [Batch 200/200] [acc: 1.5480%] [G loss: nan] [Balance loss: 0.834534] [BNS_loss:nan] [S loss: -16634.544922] 
+{'precision': array([0.05351162]), 'recall': array([0.1735427]), 'ndcg': array([0.14813069])}
+[Epoch 293/400] [Batch 200/200] [acc: 1.5782%] [G loss: nan] [Balance loss: 0.836123] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05355684]), 'recall': array([0.17357157]), 'ndcg': array([0.14805672])}
+[Epoch 294/400] [Batch 200/200] [acc: 1.5632%] [G loss: nan] [Balance loss: 0.836449] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05350157]), 'recall': array([0.17360147]), 'ndcg': array([0.14802512])}
+[Epoch 295/400] [Batch 200/200] [acc: 1.5707%] [G loss: nan] [Balance loss: 0.836263] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05349153]), 'recall': array([0.17343931]), 'ndcg': array([0.1479823])}
+[Epoch 296/400] [Batch 200/200] [acc: 1.5533%] [G loss: nan] [Balance loss: 0.836499] [BNS_loss:nan] [S loss: -16634.525391] 
+{'precision': array([0.05363052]), 'recall': array([0.17403255]), 'ndcg': array([0.14815229])}
+[Epoch 297/400] [Batch 200/200] [acc: 1.5621%] [G loss: nan] [Balance loss: 0.836314] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05355684]), 'recall': array([0.17354396]), 'ndcg': array([0.14813405])}
+[Epoch 298/400] [Batch 200/200] [acc: 1.5682%] [G loss: nan] [Balance loss: 0.836354] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05351665]), 'recall': array([0.17346148]), 'ndcg': array([0.14787158])}
+[Epoch 299/400] [Batch 200/200] [acc: 1.5605%] [G loss: nan] [Balance loss: 0.835122] [BNS_loss:nan] [S loss: -16634.541016] 
+{'precision': array([0.05354009]), 'recall': array([0.17355166]), 'ndcg': array([0.14802986])}
+[Epoch 300/400] [Batch 200/200] [acc: 1.5454%] [G loss: nan] [Balance loss: 0.836418] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05358195]), 'recall': array([0.17379718]), 'ndcg': array([0.14806885])}
+[Epoch 301/400] [Batch 200/200] [acc: 1.5811%] [G loss: nan] [Balance loss: 0.836285] [BNS_loss:nan] [S loss: -16634.619141] 
+{'precision': array([0.053592]), 'recall': array([0.17375569]), 'ndcg': array([0.14810581])}
+[Epoch 302/400] [Batch 200/200] [acc: 1.5750%] [G loss: nan] [Balance loss: 0.835064] [BNS_loss:nan] [S loss: -16634.556641] 
+{'precision': array([0.05365899]), 'recall': array([0.17397568]), 'ndcg': array([0.14832853])}
+[Epoch 303/400] [Batch 200/200] [acc: 1.5773%] [G loss: nan] [Balance loss: 0.835766] [BNS_loss:nan] [S loss: -16634.585938] 
+{'precision': array([0.05361042]), 'recall': array([0.17380114]), 'ndcg': array([0.14831869])}
+[Epoch 304/400] [Batch 200/200] [acc: 1.5610%] [G loss: nan] [Balance loss: 0.834929] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05362214]), 'recall': array([0.17347994]), 'ndcg': array([0.14822455])}
+[Epoch 305/400] [Batch 200/200] [acc: 1.5709%] [G loss: nan] [Balance loss: 0.836248] [BNS_loss:nan] [S loss: -16634.613281] 
+{'precision': array([0.05369248]), 'recall': array([0.17401669]), 'ndcg': array([0.14847655])}
+[Epoch 306/400] [Batch 200/200] [acc: 1.5773%] [G loss: nan] [Balance loss: 0.836165] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05366234]), 'recall': array([0.17398055]), 'ndcg': array([0.14833175])}
+[Epoch 307/400] [Batch 200/200] [acc: 1.5309%] [G loss: nan] [Balance loss: 0.836667] [BNS_loss:nan] [S loss: -16634.560547] 
+{'precision': array([0.05372095]), 'recall': array([0.17401207]), 'ndcg': array([0.14849314])}
+[Epoch 308/400] [Batch 200/200] [acc: 1.5610%] [G loss: nan] [Balance loss: 0.836210] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05354679]), 'recall': array([0.17373791]), 'ndcg': array([0.14839197])}
+[Epoch 309/400] [Batch 200/200] [acc: 1.5475%] [G loss: nan] [Balance loss: 0.836353] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05356856]), 'recall': array([0.17359124]), 'ndcg': array([0.14826801])}
+[Epoch 310/400] [Batch 200/200] [acc: 1.5706%] [G loss: nan] [Balance loss: 0.835669] [BNS_loss:nan] [S loss: -16634.574219] 
+{'precision': array([0.05355014]), 'recall': array([0.17374193]), 'ndcg': array([0.14827094])}
+[Epoch 311/400] [Batch 200/200] [acc: 1.5446%] [G loss: nan] [Balance loss: 0.835038] [BNS_loss:nan] [S loss: -16634.582031] 
+{'precision': array([0.05362382]), 'recall': array([0.17368047]), 'ndcg': array([0.14816761])}
+[Epoch 312/400] [Batch 200/200] [acc: 1.5427%] [G loss: nan] [Balance loss: 0.835969] [BNS_loss:nan] [S loss: -16634.568359] 
+{'precision': array([0.05362047]), 'recall': array([0.17389557]), 'ndcg': array([0.14841572])}
+[Epoch 313/400] [Batch 200/200] [acc: 1.5537%] [G loss: nan] [Balance loss: 0.835618] [BNS_loss:nan] [S loss: -16634.494141] 
+{'precision': array([0.05356688]), 'recall': array([0.17371534]), 'ndcg': array([0.14807281])}
+[Epoch 314/400] [Batch 200/200] [acc: 1.5692%] [G loss: nan] [Balance loss: 0.835193] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05357861]), 'recall': array([0.17387761]), 'ndcg': array([0.14826625])}
+[Epoch 315/400] [Batch 200/200] [acc: 1.5712%] [G loss: nan] [Balance loss: 0.835244] [BNS_loss:nan] [S loss: -16634.597656] 
+{'precision': array([0.05367238]), 'recall': array([0.17391874]), 'ndcg': array([0.1483687])}
+[Epoch 316/400] [Batch 200/200] [acc: 1.5656%] [G loss: nan] [Balance loss: 0.836440] [BNS_loss:nan] [S loss: -16634.601562] 
+{'precision': array([0.05368578]), 'recall': array([0.17425499]), 'ndcg': array([0.14839507])}
+[Epoch 317/400] [Batch 200/200] [acc: 1.5420%] [G loss: nan] [Balance loss: 0.835951] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05360372]), 'recall': array([0.17398018]), 'ndcg': array([0.14837405])}
+[Epoch 318/400] [Batch 200/200] [acc: 1.5508%] [G loss: nan] [Balance loss: 0.835789] [BNS_loss:nan] [S loss: -16634.589844] 
+{'precision': array([0.0536908]), 'recall': array([0.17424291]), 'ndcg': array([0.14856504])}
+[Epoch 319/400] [Batch 200/200] [acc: 1.5337%] [G loss: nan] [Balance loss: 0.836047] [BNS_loss:nan] [S loss: -16634.578125] 
+{'precision': array([0.05361042]), 'recall': array([0.17389906]), 'ndcg': array([0.14836578])}
+[Epoch 320/400] [Batch 200/200] [acc: 1.5681%] [G loss: nan] [Balance loss: 0.835405] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05359703]), 'recall': array([0.17387785]), 'ndcg': array([0.14839885])}
+[Epoch 321/400] [Batch 200/200] [acc: 1.5668%] [G loss: nan] [Balance loss: 0.836625] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05359703]), 'recall': array([0.17386536]), 'ndcg': array([0.14826986])}
+[Epoch 322/400] [Batch 200/200] [acc: 1.5853%] [G loss: nan] [Balance loss: 0.835829] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05361377]), 'recall': array([0.1736354]), 'ndcg': array([0.14822544])}
+[Epoch 323/400] [Batch 200/200] [acc: 1.5657%] [G loss: nan] [Balance loss: 0.835364] [BNS_loss:nan] [S loss: -16634.556641] 
+{'precision': array([0.05361377]), 'recall': array([0.1739282]), 'ndcg': array([0.1483573])}
+[Epoch 324/400] [Batch 200/200] [acc: 1.5723%] [G loss: nan] [Balance loss: 0.836682] [BNS_loss:nan] [S loss: -16634.542969] 
+{'precision': array([0.05363052]), 'recall': array([0.17410017]), 'ndcg': array([0.14838102])}
+[Epoch 325/400] [Batch 200/200] [acc: 1.5487%] [G loss: nan] [Balance loss: 0.835552] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05359033]), 'recall': array([0.17374856]), 'ndcg': array([0.1484069])}
+[Epoch 326/400] [Batch 200/200] [acc: 1.5472%] [G loss: nan] [Balance loss: 0.836050] [BNS_loss:nan] [S loss: -16634.570312] 
+{'precision': array([0.05359368]), 'recall': array([0.17385911]), 'ndcg': array([0.14834242])}
+[Epoch 327/400] [Batch 200/200] [acc: 1.5651%] [G loss: nan] [Balance loss: 0.835821] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.0537042]), 'recall': array([0.17396869]), 'ndcg': array([0.1483785])}
+[Epoch 328/400] [Batch 200/200] [acc: 1.5505%] [G loss: nan] [Balance loss: 0.835081] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.0535987]), 'recall': array([0.17391948]), 'ndcg': array([0.14830506])}
+[Epoch 329/400] [Batch 200/200] [acc: 1.5527%] [G loss: nan] [Balance loss: 0.835848] [BNS_loss:nan] [S loss: -16634.576172] 
+{'precision': array([0.05354679]), 'recall': array([0.1737921]), 'ndcg': array([0.14837467])}
+[Epoch 330/400] [Batch 200/200] [acc: 1.5587%] [G loss: nan] [Balance loss: 0.835574] [BNS_loss:nan] [S loss: -16634.537109] 
+{'precision': array([0.05357023]), 'recall': array([0.17368858]), 'ndcg': array([0.14829693])}
+[Epoch 331/400] [Batch 200/200] [acc: 1.5629%] [G loss: nan] [Balance loss: 0.835362] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05367071]), 'recall': array([0.17409366]), 'ndcg': array([0.1482155])}
+[Epoch 332/400] [Batch 200/200] [acc: 1.5630%] [G loss: nan] [Balance loss: 0.835098] [BNS_loss:nan] [S loss: -16634.564453] 
+{'precision': array([0.05363052]), 'recall': array([0.17390355]), 'ndcg': array([0.14830574])}
+[Epoch 333/400] [Batch 200/200] [acc: 1.5468%] [G loss: nan] [Balance loss: 0.836355] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05359368]), 'recall': array([0.17357019]), 'ndcg': array([0.14829543])}
+[Epoch 334/400] [Batch 200/200] [acc: 1.5664%] [G loss: nan] [Balance loss: 0.836665] [BNS_loss:nan] [S loss: -16634.601562] 
+{'precision': array([0.05347646]), 'recall': array([0.17345563]), 'ndcg': array([0.14813796])}
+[Epoch 335/400] [Batch 200/200] [acc: 1.5597%] [G loss: nan] [Balance loss: 0.835969] [BNS_loss:nan] [S loss: -16634.578125] 
+{'precision': array([0.05356688]), 'recall': array([0.17370873]), 'ndcg': array([0.14824235])}
+[Epoch 336/400] [Batch 200/200] [acc: 1.5533%] [G loss: nan] [Balance loss: 0.835590] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05365061]), 'recall': array([0.17390406]), 'ndcg': array([0.14843782])}
+[Epoch 337/400] [Batch 200/200] [acc: 1.5752%] [G loss: nan] [Balance loss: 0.836553] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05366903]), 'recall': array([0.17407745]), 'ndcg': array([0.1483507])}
+[Epoch 338/400] [Batch 200/200] [acc: 1.5869%] [G loss: nan] [Balance loss: 0.835793] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05365899]), 'recall': array([0.173873]), 'ndcg': array([0.14838173])}
+[Epoch 339/400] [Batch 200/200] [acc: 1.5540%] [G loss: nan] [Balance loss: 0.836188] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05359535]), 'recall': array([0.17356427]), 'ndcg': array([0.14837243])}
+[Epoch 340/400] [Batch 200/200] [acc: 1.5515%] [G loss: nan] [Balance loss: 0.836249] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05358865]), 'recall': array([0.17366934]), 'ndcg': array([0.14830781])}
+[Epoch 341/400] [Batch 200/200] [acc: 1.5443%] [G loss: nan] [Balance loss: 0.836128] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05367238]), 'recall': array([0.17402808]), 'ndcg': array([0.14830823])}
+[Epoch 342/400] [Batch 200/200] [acc: 1.5571%] [G loss: nan] [Balance loss: 0.835769] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05355684]), 'recall': array([0.17371456]), 'ndcg': array([0.14828385])}
+[Epoch 343/400] [Batch 200/200] [acc: 1.5671%] [G loss: nan] [Balance loss: 0.835093] [BNS_loss:nan] [S loss: -16634.541016] 
+{'precision': array([0.05360205]), 'recall': array([0.17349437]), 'ndcg': array([0.14823849])}
+[Epoch 344/400] [Batch 200/200] [acc: 1.5452%] [G loss: nan] [Balance loss: 0.835705] [BNS_loss:nan] [S loss: -16634.589844] 
+{'precision': array([0.05356018]), 'recall': array([0.17339674]), 'ndcg': array([0.14822922])}
+[Epoch 345/400] [Batch 200/200] [acc: 1.5352%] [G loss: nan] [Balance loss: 0.836359] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.0535133]), 'recall': array([0.17358598]), 'ndcg': array([0.14811726])}
+[Epoch 346/400] [Batch 200/200] [acc: 1.5795%] [G loss: nan] [Balance loss: 0.835708] [BNS_loss:nan] [S loss: -16634.511719] 
+{'precision': array([0.0535853]), 'recall': array([0.17395453]), 'ndcg': array([0.14847395])}
+[Epoch 347/400] [Batch 200/200] [acc: 1.5602%] [G loss: nan] [Balance loss: 0.835625] [BNS_loss:nan] [S loss: -16634.572266] 
+{'precision': array([0.0535853]), 'recall': array([0.17355031]), 'ndcg': array([0.14823581])}
+[Epoch 348/400] [Batch 200/200] [acc: 1.5549%] [G loss: nan] [Balance loss: 0.835446] [BNS_loss:nan] [S loss: -16634.535156] 
+{'precision': array([0.05366234]), 'recall': array([0.1740034]), 'ndcg': array([0.14834847])}
+[Epoch 349/400] [Batch 200/200] [acc: 1.5665%] [G loss: nan] [Balance loss: 0.835584] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05362382]), 'recall': array([0.17365737]), 'ndcg': array([0.14838706])}
+[Epoch 350/400] [Batch 200/200] [acc: 1.5624%] [G loss: nan] [Balance loss: 0.835747] [BNS_loss:nan] [S loss: -16634.574219] 
+{'precision': array([0.05365731]), 'recall': array([0.17386343]), 'ndcg': array([0.14846975])}
+[Epoch 351/400] [Batch 200/200] [acc: 1.5396%] [G loss: nan] [Balance loss: 0.835839] [BNS_loss:nan] [S loss: -16634.615234] 
+{'precision': array([0.05360205]), 'recall': array([0.17371937]), 'ndcg': array([0.14836551])}
+[Epoch 352/400] [Batch 200/200] [acc: 1.5693%] [G loss: nan] [Balance loss: 0.836505] [BNS_loss:nan] [S loss: -16634.570312] 
+{'precision': array([0.05360707]), 'recall': array([0.1736946]), 'ndcg': array([0.14820559])}
+[Epoch 353/400] [Batch 200/200] [acc: 1.5366%] [G loss: nan] [Balance loss: 0.836331] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05349488]), 'recall': array([0.17327345]), 'ndcg': array([0.14809857])}
+[Epoch 354/400] [Batch 200/200] [acc: 1.5626%] [G loss: nan] [Balance loss: 0.836076] [BNS_loss:nan] [S loss: -16634.587891] 
+{'precision': array([0.05370085]), 'recall': array([0.17415614]), 'ndcg': array([0.1484951])}
+[Epoch 355/400] [Batch 200/200] [acc: 1.5521%] [G loss: nan] [Balance loss: 0.835599] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05361377]), 'recall': array([0.1739166]), 'ndcg': array([0.14836576])}
+[Epoch 356/400] [Batch 200/200] [acc: 1.5531%] [G loss: nan] [Balance loss: 0.834902] [BNS_loss:nan] [S loss: -16634.556641] 
+{'precision': array([0.05358865]), 'recall': array([0.17348733]), 'ndcg': array([0.1481875])}
+[Epoch 357/400] [Batch 200/200] [acc: 1.5476%] [G loss: nan] [Balance loss: 0.835999] [BNS_loss:nan] [S loss: -16634.544922] 
+{'precision': array([0.05365731]), 'recall': array([0.17388902]), 'ndcg': array([0.14844225])}
+[Epoch 358/400] [Batch 200/200] [acc: 1.5682%] [G loss: nan] [Balance loss: 0.836011] [BNS_loss:nan] [S loss: -16634.576172] 
+{'precision': array([0.05349153]), 'recall': array([0.17341657]), 'ndcg': array([0.1481382])}
+[Epoch 359/400] [Batch 200/200] [acc: 1.5454%] [G loss: nan] [Balance loss: 0.837065] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05352334]), 'recall': array([0.17357774]), 'ndcg': array([0.14817943])}
+[Epoch 360/400] [Batch 200/200] [acc: 1.5405%] [G loss: nan] [Balance loss: 0.835948] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05362047]), 'recall': array([0.17416221]), 'ndcg': array([0.14848711])}
+[Epoch 361/400] [Batch 200/200] [acc: 1.5386%] [G loss: nan] [Balance loss: 0.835422] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05358363]), 'recall': array([0.17376273]), 'ndcg': array([0.14839448])}
+[Epoch 362/400] [Batch 200/200] [acc: 1.5568%] [G loss: nan] [Balance loss: 0.835271] [BNS_loss:nan] [S loss: -16634.525391] 
+{'precision': array([0.05365396]), 'recall': array([0.17380147]), 'ndcg': array([0.14816777])}
+[Epoch 363/400] [Batch 200/200] [acc: 1.5920%] [G loss: nan] [Balance loss: 0.836238] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05354344]), 'recall': array([0.17360763]), 'ndcg': array([0.14817688])}
+[Epoch 364/400] [Batch 200/200] [acc: 1.5656%] [G loss: nan] [Balance loss: 0.835884] [BNS_loss:nan] [S loss: -16634.572266] 
+{'precision': array([0.05358195]), 'recall': array([0.17383392]), 'ndcg': array([0.14814549])}
+[Epoch 365/400] [Batch 200/200] [acc: 1.5516%] [G loss: nan] [Balance loss: 0.835931] [BNS_loss:nan] [S loss: -16634.605469] 
+{'precision': array([0.05363387]), 'recall': array([0.17385445]), 'ndcg': array([0.14839329])}
+[Epoch 366/400] [Batch 200/200] [acc: 1.5718%] [G loss: nan] [Balance loss: 0.834670] [BNS_loss:nan] [S loss: -16634.562500] 
+{'precision': array([0.05356018]), 'recall': array([0.17370762]), 'ndcg': array([0.14824786])}
+[Epoch 367/400] [Batch 200/200] [acc: 1.5594%] [G loss: nan] [Balance loss: 0.836004] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05350995]), 'recall': array([0.17334429]), 'ndcg': array([0.14814246])}
+[Epoch 368/400] [Batch 200/200] [acc: 1.5769%] [G loss: nan] [Balance loss: 0.836352] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05360707]), 'recall': array([0.17370626]), 'ndcg': array([0.14826416])}
+[Epoch 369/400] [Batch 200/200] [acc: 1.5526%] [G loss: nan] [Balance loss: 0.835598] [BNS_loss:nan] [S loss: -16634.570312] 
+{'precision': array([0.05366736]), 'recall': array([0.17401272]), 'ndcg': array([0.14840446])}
+[Epoch 370/400] [Batch 200/200] [acc: 1.5569%] [G loss: nan] [Balance loss: 0.836310] [BNS_loss:nan] [S loss: -16634.564453] 
+{'precision': array([0.05363052]), 'recall': array([0.17390172]), 'ndcg': array([0.14828713])}
+[Epoch 371/400] [Batch 200/200] [acc: 1.5264%] [G loss: nan] [Balance loss: 0.835563] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05359368]), 'recall': array([0.17377358]), 'ndcg': array([0.14811514])}
+[Epoch 372/400] [Batch 200/200] [acc: 1.5719%] [G loss: nan] [Balance loss: 0.836191] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05363889]), 'recall': array([0.17400941]), 'ndcg': array([0.14843932])}
+[Epoch 373/400] [Batch 200/200] [acc: 1.5621%] [G loss: nan] [Balance loss: 0.835788] [BNS_loss:nan] [S loss: -16634.539062] 
+{'precision': array([0.05364391]), 'recall': array([0.17402666]), 'ndcg': array([0.14839842])}
+[Epoch 374/400] [Batch 200/200] [acc: 1.5496%] [G loss: nan] [Balance loss: 0.836911] [BNS_loss:nan] [S loss: -16634.574219] 
+{'precision': array([0.05359033]), 'recall': array([0.17374085]), 'ndcg': array([0.14824663])}
+[Epoch 375/400] [Batch 200/200] [acc: 1.5563%] [G loss: nan] [Balance loss: 0.835494] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05366568]), 'recall': array([0.17412637]), 'ndcg': array([0.14847578])}
+[Epoch 376/400] [Batch 200/200] [acc: 1.5632%] [G loss: nan] [Balance loss: 0.836096] [BNS_loss:nan] [S loss: -16634.564453] 
+{'precision': array([0.05359368]), 'recall': array([0.17370843]), 'ndcg': array([0.14836251])}
+[Epoch 377/400] [Batch 200/200] [acc: 1.5446%] [G loss: nan] [Balance loss: 0.835100] [BNS_loss:nan] [S loss: -16634.527344] 
+{'precision': array([0.05368076]), 'recall': array([0.1738658]), 'ndcg': array([0.14838899])}
+[Epoch 378/400] [Batch 200/200] [acc: 1.5679%] [G loss: nan] [Balance loss: 0.835063] [BNS_loss:nan] [S loss: -16634.574219] 
+{'precision': array([0.05367573]), 'recall': array([0.17393593]), 'ndcg': array([0.14839859])}
+[Epoch 379/400] [Batch 200/200] [acc: 1.5619%] [G loss: nan] [Balance loss: 0.835472] [BNS_loss:nan] [S loss: -16634.541016] 
+{'precision': array([0.05363387]), 'recall': array([0.17359294]), 'ndcg': array([0.14814493])}
+[Epoch 380/400] [Batch 200/200] [acc: 1.5602%] [G loss: nan] [Balance loss: 0.836079] [BNS_loss:nan] [S loss: -16634.570312] 
+{'precision': array([0.05366903]), 'recall': array([0.17427448]), 'ndcg': array([0.14852916])}
+[Epoch 381/400] [Batch 200/200] [acc: 1.5344%] [G loss: nan] [Balance loss: 0.835152] [BNS_loss:nan] [S loss: -16634.578125] 
+{'precision': array([0.05357023]), 'recall': array([0.17364136]), 'ndcg': array([0.14828905])}
+[Epoch 382/400] [Batch 200/200] [acc: 1.5568%] [G loss: nan] [Balance loss: 0.836105] [BNS_loss:nan] [S loss: -16634.578125] 
+{'precision': array([0.05359703]), 'recall': array([0.17366217]), 'ndcg': array([0.14831355])}
+[Epoch 383/400] [Batch 200/200] [acc: 1.5365%] [G loss: nan] [Balance loss: 0.835936] [BNS_loss:nan] [S loss: -16634.550781] 
+{'precision': array([0.05360707]), 'recall': array([0.17376442]), 'ndcg': array([0.14828221])}
+[Epoch 384/400] [Batch 200/200] [acc: 1.5621%] [G loss: nan] [Balance loss: 0.835328] [BNS_loss:nan] [S loss: -16634.521484] 
+{'precision': array([0.0535987]), 'recall': array([0.17388158]), 'ndcg': array([0.14841539])}
+[Epoch 385/400] [Batch 200/200] [acc: 1.5449%] [G loss: nan] [Balance loss: 0.835277] [BNS_loss:nan] [S loss: -16634.560547] 
+{'precision': array([0.05365731]), 'recall': array([0.17391805]), 'ndcg': array([0.14832692])}
+[Epoch 386/400] [Batch 200/200] [acc: 1.5416%] [G loss: nan] [Balance loss: 0.835848] [BNS_loss:nan] [S loss: -16634.531250] 
+{'precision': array([0.05355851]), 'recall': array([0.17364637]), 'ndcg': array([0.14821614])}
+[Epoch 387/400] [Batch 200/200] [acc: 1.5757%] [G loss: nan] [Balance loss: 0.834112] [BNS_loss:nan] [S loss: -16634.593750] 
+{'precision': array([0.05364224]), 'recall': array([0.17389464]), 'ndcg': array([0.14842233])}
+[Epoch 388/400] [Batch 200/200] [acc: 1.5883%] [G loss: nan] [Balance loss: 0.835040] [BNS_loss:nan] [S loss: -16634.597656] 
+{'precision': array([0.0536188]), 'recall': array([0.17407429]), 'ndcg': array([0.14842151])}
+[Epoch 389/400] [Batch 200/200] [acc: 1.5607%] [G loss: nan] [Balance loss: 0.836166] [BNS_loss:nan] [S loss: -16634.593750] 
+{'precision': array([0.05358698]), 'recall': array([0.17365566]), 'ndcg': array([0.14838461])}
+[Epoch 390/400] [Batch 200/200] [acc: 1.5809%] [G loss: nan] [Balance loss: 0.836751] [BNS_loss:nan] [S loss: -16634.517578] 
+{'precision': array([0.05356521]), 'recall': array([0.17353248]), 'ndcg': array([0.14816296])}
+[Epoch 391/400] [Batch 200/200] [acc: 1.5507%] [G loss: nan] [Balance loss: 0.835602] [BNS_loss:nan] [S loss: -16634.537109] 
+{'precision': array([0.05369415]), 'recall': array([0.17416003]), 'ndcg': array([0.14855584])}
+[Epoch 392/400] [Batch 200/200] [acc: 1.5527%] [G loss: nan] [Balance loss: 0.835924] [BNS_loss:nan] [S loss: -16634.554688] 
+{'precision': array([0.05366401]), 'recall': array([0.17413758]), 'ndcg': array([0.1483233])}
+[Epoch 393/400] [Batch 200/200] [acc: 1.5587%] [G loss: nan] [Balance loss: 0.835842] [BNS_loss:nan] [S loss: -16634.585938] 
+{'precision': array([0.05365061]), 'recall': array([0.17406279]), 'ndcg': array([0.148388])}
+[Epoch 394/400] [Batch 200/200] [acc: 1.5448%] [G loss: nan] [Balance loss: 0.835496] [BNS_loss:nan] [S loss: -16634.546875] 
+{'precision': array([0.05369415]), 'recall': array([0.17399055]), 'ndcg': array([0.14828284])}
+[Epoch 395/400] [Batch 200/200] [acc: 1.5441%] [G loss: nan] [Balance loss: 0.836128] [BNS_loss:nan] [S loss: -16634.566406] 
+{'precision': array([0.05358028]), 'recall': array([0.17390137]), 'ndcg': array([0.14825541])}
+[Epoch 396/400] [Batch 200/200] [acc: 1.5609%] [G loss: nan] [Balance loss: 0.836613] [BNS_loss:nan] [S loss: -16634.558594] 
+{'precision': array([0.05354176]), 'recall': array([0.17376845]), 'ndcg': array([0.14815973])}
+[Epoch 397/400] [Batch 200/200] [acc: 1.5669%] [G loss: nan] [Balance loss: 0.836444] [BNS_loss:nan] [S loss: -16634.601562] 
+{'precision': array([0.05350157]), 'recall': array([0.17352457]), 'ndcg': array([0.14804924])}
+[Epoch 398/400] [Batch 200/200] [acc: 1.5469%] [G loss: nan] [Balance loss: 0.835918] [BNS_loss:nan] [S loss: -16634.572266] 
+{'precision': array([0.0535987]), 'recall': array([0.17372434]), 'ndcg': array([0.1483048])}
+[Epoch 399/400] [Batch 200/200] [acc: 1.5626%] [G loss: nan] [Balance loss: 0.835366] [BNS_loss:nan] [S loss: -16634.591797] 
+{'precision': array([0.05372597]), 'recall': array([0.17409799]), 'ndcg': array([0.14843561])}
+[Epoch 400/400] [Batch 200/200] [acc: 1.5558%] [G loss: nan] [Balance loss: 0.836333] [BNS_loss:nan] [S loss: -16634.609375] 
+{'precision': array([0.05356521]), 'recall': array([0.17360384]), 'ndcg': array([0.14816466])}
+Running Time is: 3:26:08.889170
+
